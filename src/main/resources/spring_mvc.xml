@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 
+			===================================================
+			===================================================
+			  SpringMVC配置文件：主要配置网站跳转逻辑的控制和设置
+			===================================================
+			===================================================
+	 -->
+	  <description>SpringMVC Configuration</description>
+	
+	 <!-- 
+	 
+	 	一、IoC注解解析器,scan指定扫描的包 
+	 
+	  -->
+	 <context:component-scan base-package="com.gz.ssm" use-default-filters="false"><!-- 自动扫描controller(自动注入) - -->
+	 	<!-- 只扫描控制器Controller了，默认是扫描所有 use-default-filters="true" -->
+	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	 </context:component-scan>
+	 
+	  
+  	
+  	<!-- 
+  	
+  		二、配置JSP视图解析器（为了缩减视图view字符串长度，针对jsp文件）
+  		
+  		例如：mv.setViewName("/WEB-INF/views/welcome.jsp");  前缀/WEB-INF/views/，后缀.jsp
+  	 -->
+  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  		<property name="prefix" value="/WEB-INF/views/" /><!-- 前缀 -->
+  		<property name="suffix"  value=".jsp" /><!-- 后缀 -->
+  	</bean>
+  	
+   <!-- 	
+ 		三、Servlet3.0的文件上传解析器 
+ 		1、id名字不可修改
+ 		2、配合web.xml中前端处理器来限制上传大小，缓存等。
+ 		3、本上传解析器必须要求servlet在3.0以上，不然只能用Apatch的CommonFileUpload了。
+ 		4、需要在web.xml前端控制器中设置相应上传参数
+ 	-->
+ 	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+	 
+	 
+	 <!-- 
+	 	
+ 		四、SpringMVC两个标准配置
+ 		
+	-->
+	
+	  <!-- 4.1 MVC注解解析器，支持springMVC更高级操作：动态映射，JSR303校验，快捷的ajax等 -->
+ 	 <mvc:annotation-driven />
+ 	 
+ 	  <!-- 
+ 	  		4.2 处理静态资源文件请求（方式一）
+ 	  	
+ 	  		1： 将SpringMVC不能处理的静态资源交回给servlet来处理。
+ 	  		
+			2： 若不加这句，则html等静态文件无法被访问到，会被前端处理器的/全部拦截分发给其他Controller处理器
+			比如：http://localhost:8080/GzMavenSSM/static/bootstrap.min.css springMVC前端处理器会以为是去往bootstrap.min.css名字的控制器Controller呢
+			
+			3： 方式一的限制：静态资源存放的位置不能是WEB-INF下（解析后），因为WEB-INF文件夹不可直接url访问。
+ 	  -->
+ 	    <!-- <mvc:default-servlet-handler />     -->
+ 	  
+ 	  <!--
+ 	  
+ 	  		资源映射：处理静态资源文件请求 （方式二）
+ 	  		
+ 	  		1、将static内的文件映射为/static访问路径。
+ 	  		举例：resources/static/goOut.html解析后存放在classes/static/goOut.html,映射后访问为：http://localhost:8080/GzSpringMVC/goOut.html
+ 	  		
+ 	  		2、映射方式，静态文件可以放到任意位置，比上面的方式一更灵活。允许静态资源放在任何地方，如WEB-INF目录下、类路径下等，你甚至可以将JavaScript等静态文件打到JAR包中。通过location属性指定静态资源的位置，由于location属性是Resources类型，因此可以使用诸如"classpath:"等的资源前缀指定资源位置。传统Web容器的静态资源只能放在Web容器的根路径下，<mvc:resources />完全打破了这个限制。 
+ 	  		
+ 	  		3、设置后，不拦截这些目录下的东西的访问
+ 	  		
+ 	  		4、<mvc:default-servlet-handler />将静态资源的处理经由Spring MVC框架交回Web应用服务器处理。而<mvc:resources />更进一步，由Spring MVC框架自己处理静态资源，并添加一些有用的附加值功能。 
+
+			5、你可以通过cacheSeconds属性指定静态资源在浏览器端的缓存时间，一般可将该时间设置为一年，以充分利用浏览器端的缓存。在输出静态资源时，会根据配置设置好响应报文头的Expires 和 Cache-Control值。 在接收到静态资源的获取请求时，会检查请求头的Last-Modified值，如果静态资源没有发生变化，则直接返回303相应状态码，提示客户端使用浏览器缓存的数据，而非将静态资源的内容输出到客户端，以充分节省带宽，提高程序性能。 
+ 	  -->
+ 	  
+	<!--<mvc:resources location="/static/"  mapping="/static/**" cache-period="31556926"/>-->
+	<mvc:resources location="/static/bootstrap-table/"  mapping="/static/bootstrap-table/**" cache-period="31556926"/>
+	<mvc:resources location="/static/bootstrap-4.0.0-dist/"  mapping="/static/bootstrap-4.0.0-dist/**" cache-period="31556926"/>
+	<mvc:resources location="/static/bootstrap-3.3.7-dist/"  mapping="/static/bootstrap-3.3.7-dist/**" cache-period="31556926"/>
+	<mvc:resources location="/static/js/"  mapping="/static/js/**" cache-period="31556926"/>
+	<mvc:resources location="/static/css/"  mapping="/static/css/**" cache-period="31556926"/>
+	<mvc:resources location="/static/html/"  mapping="/static/html/**" cache-period="31556926"/>
+	<mvc:resources location="/static/images/"  mapping="/static/images/**" cache-period="31556926"/>
+    
+    <!-- 
+    	资源映射可以设置的更细：
+    	<mvc:resources location="/js/"  mapping="/js/**" />  
+		<mvc:resources location="/css/"  mapping="/css/**" />  
+		<mvc:resources location="/html/"  mapping="/html/**" />  
+		<mvc:resources location="/fonts/"  mapping="/fonts/**" />  
+		<mvc:resources location="/uploadfiles/"  mapping="/uploadfiles/**" /> 
+		<mvc:resources location="/images/"  mapping="/imges/**" />  
+		<mvc:resources location="/swagger/"  mapping="/swagger/**" />  
+		<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+
+     -->
+
+	  	
+ 	 
+ 	 
+</beans>

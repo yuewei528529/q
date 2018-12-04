@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	  <!-- 
+			===========================================
+			===========================================
+			   Spring配置文件：主要配置和业务逻辑有关的
+			===========================================
+			===========================================
+	  -->
+	  <description>Spring Configuration</description>
+	  
+	 <!-- 一、IoC注解解析器,scan指定扫描的包 。功能：启动组件扫描，排除@Controller组件，主要用于扫描Service-->
+	 <context:component-scan base-package="com.gz.ssm"><!-- 扫描Service等包（非Controller包） - -->
+	 	<!-- 不扫描控制器Controller了，默认是扫描所有 use-default-filters="true" -->
+	 	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	 </context:component-scan>
+	 
+	
+	  <!-- 二、DI注解的解析器  比如要使用@Autowired就必须加这句解析器，JUnit5测试没事，web的话就必须添加了  -->
+	  <context:annotation-config />
+	  
+	  
+	  <!-- 三、AOP注解解析器 -->
+	  <aop:aspectj-autoproxy proxy-target-class="false" /><!-- 默认是false使用JDK动态代理（需真实对象实现接口），true就是CGLIB动态代理（无需接口） -->
+	  
+	  <!-- 四、配置事务TX管理器 -->
+ 	  <!-- 放到了spring_mybatis.xml中了 -->
+	  
+	  
+	  <!--    
+			五、引入外部属性文件，传递给mybatis等配置文件。 从classpath根路径去加载dao.properties数据库4要素文件 	,service.properties业务层配置  
+	  -->
+	  <context:property-placeholder location="classpath:/properties/*.properties" />
+	  
+	  <!-- spring整合SpringMVC配置 -->
+	 <import resource="classpath:spring_mvc.xml"/>   
+	  
+	 <!-- spring整合MyBatis配置 -->
+	 <import resource="classpath:spring_mybatis.xml"/>   
+	 
+	 
+</beans>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>GzSpring</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- 
+		====================
+			web.xml说明
+		====================
+		
+		1、 启动一个WEB项目的时候,容器(如:Tomcat)会去读它的配置文件web.xml.读两个节点: <listener></listener> 和 <context-param></context-param>。
+		
+		2、在springmvc的配置中，设置了<load-on-startup>1</load-on-startup>，就会等同于1的操作了，启动tomcat时会执行。
+		
+		3、配置过滤器（编码过滤器，Rest风格url过滤器）。
+	
+	 -->
+
+
+	<!-- 
+	
+		一、配置Spring上下文监听器
+		
+		1、ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext.xml（自己改名为spring_config.xml）的配置信息。因为它实现了ServletContextListener这个接口，在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法来检查各种错误。
+
+		2、ApplicationContext.xml这个配置文件部一般默认放置在约定的默认路径”/WEB-INF/applicationContext.xml“里。也可以在web.xml中配置该文件的其他位置context-param。
+
+	 -->
+	<!--Spring上下文监听器，监听系统问题的，启动tomcat时会在console控制台报出各种遇到的错误问题，并报出404错误，来确保程序完全正确！-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+	<!-- 继承Spring主配置文件 （启动Spring容器），自定义配置文件放置位置和名称，默认名字applicationContext.xml -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring_config.xml</param-value>
+	</context-param>
+    <listener>  
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
+    </listener> 
+
+
+	<!-- 
+	
+		二、配置SpringMVC前端控制器，读取spring主配置文件
+	
+	 -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<!-- DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，而且负责职责的分派，而且与Spring 
+			IoC容器无缝集成，从而可以获得Spring的所有好处 -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 初始化参数，告诉 DispatcherServlet去哪里去找mvc配置文件。 如果不配置init-param，则默认去WEB-INF目录中去寻找<servlet-name>内容-servlet.xml文件（例如这里的：SpringMVC-servlcet.xml） -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring_config.xml</param-value>
+		</init-param>
+
+		<!-- 启动项，设置后在tomcat启动时就初始化SpringMVC容器，不配置则在第一次请求时才初始化，复习javaEE中servlce生命周期 -->
+		<load-on-startup>1</load-on-startup>
+
+		<!-- 文件上传的配置，配合spring_mvc.xml中servlet3.0上传解析器 1、maxFileSize：数值类型，表示单个文件的最大大小。默认为-1，表示不限制。当有单个文件的大小超过了max-file-size指定的值时将抛出IllegalStateException异常。 
+			2、maxRequestSize：数值类型，表示一次上传所有文件的总最大大小。默认为-1，表示不限制。当上传时所有文件的大小超过了max-request-size时也将抛出IllegalStateException异常。 
+			3、fileSizeThreshold：当文件大小超过指定的大小后将写入到硬盘上。默认是0，表示所有大小的文件上传后都会作为一个临时文件写入到硬盘上。 
+			4、location 配合3，指定上传文件存放的目录。当我们指定了location后，我们在调用Part的write(String fileName)方法把文件写入到硬盘的时候可以，文件名称可以不用带路径，但是如果fileName带了绝对路径，那将以fileName所带路径为准把文件写入磁盘。 -->
+		<multipart-config>
+			<location>D:/temp/</location>
+			<max-file-size>-1</max-file-size><!-- 5m:5*1024*1024字节 -->
+			<max-request-size>-1</max-request-size>
+			<file-size-threshold>1024</file-size-threshold>
+		</multipart-config>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+
+	<!-- 
+			
+			配置过滤器
+			
+			1、编码过滤器（必须放到所有过滤器前面）
+			
+			2、Rest风格url过滤器
+	
+	 -->
+
+	<!-- 三、配置编码过滤器（针对中文乱码),一定要放在所有过滤器之前 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<!-- 过滤器使用的是现成的CharacterEncodingFilter类 -->
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<!-- 初始化参数，为CharacterEncodingFilter类中的成员变量赋值 -->
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceRequestEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceResponseEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<!-- 为所有对象都执行过滤，来使中文不乱码 -->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!--  四、使用Rest风格的URI，将页面普通的post请求转为指定的delete或者put请求-->
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+		
+	
+	
+	<!--五、日志框架log4j配置文件开始(不写也没事，ssm约定在resources下直接放log4j.properties或log4j2.xml即可使日志效果实现)-->
+	<context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j2.xml</param-value>
+    </context-param>
+	
+	
+	
+	
+</web-app>

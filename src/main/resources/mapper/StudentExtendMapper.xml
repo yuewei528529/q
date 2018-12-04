@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gz.ssm.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.gz.ssm.entity.Student">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  
+  <!-- 通用where条件语句(其中的name和id参数必须传入，否则报错。或者传入的是student对象：Student [id=null, name=1234, age=null, date=null]，则这里不会出错 。或者使用@RequestParam(value="sort",required=false)String  sort,//required=false作用：若没有传入sort参数，则默认sort=NULL的操作了-->
+   <sql id="Example_Where_Base">
+   		<where>
+	   		<if test="name!=null">
+	       		and name=#{name}
+	       </if>
+	        <if test="id!=null">
+	       		and id=#{id}
+	       </if>
+   		</where>
+  </sql>
+  
+  <!-- 基础数据 -->
+  <sql id="Base_Column_List">
+    id, name, age, date,hetongjiner,xiangmumc,shoukdanw,yongtu,fukuanbili,yifujiner,yifubili,yuer,hetongbh,danw,shuliang,
+    danjia,kaipjiner,sjjhq
+  </sql>
+  
+  
+  
+  <!-- 单条插入 -->
+  <insert id="insert" parameterType="com.gz.ssm.entity.Student">
+    insert into student (id, name, age, 
+      date)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{date})
+  </insert>
+  
+   <!-- 
+   
+   		批量(batch)插入 
+   		
+   		collection：指定要遍历的集合：
+        list类型的参数会特殊处理封装在map中，map的key就叫list
+        item：将当前遍历出的元素赋值给指定的变量
+        separator:每个元素之间的分隔符
+        open：遍历出所有结果拼接一个开始的字符
+        close:遍历出所有结果拼接一个结束的字符
+        index:索引。遍历list的时候是index就是索引，item就是当前值
+        遍历map的时候index表示的就是map的key，item就是map的值
+        #{变量名}就能取出变量的值也就是当前遍历出的元素
+   		
+   	-->
+  <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" >
+	     <selectKey resultType="long" keyProperty="id">
+	      	SELECT LAST_INSERT_ID()
+	    </selectKey>
+	    insert into student (name, age, date) values  
+	    <foreach collection="studentList" item="item" index="index" separator="," >
+	        (#{item.name},#{item.age},#{item.date})
+	    </foreach>
+  </insert>
+  
+  <!-- 
+  		单条插入(带条件）
+  		
+  		useGeneratedKeys="true" keyProperty="id" 设置后可以获取到新增id
+  		
+  		新增id获取方法：不是直接返回id而是要获取同个对象的新增后的id值
+  		studentService.insert(student);
+		Long id=student.getId();
+  
+   -->
+  <insert id="insertSelective" parameterType="com.gz.ssm.entity.Student" useGeneratedKeys="true" keyProperty="id">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 修改 --> 
+  <update id="updateByExample" parameterType="map">
+    update student
+    set id = #{id,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP}
+    where 
+			id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 修改（判断参数） -->
+   <update id="updateByExampleSelective"  parameterType="map">
+    update student
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where 
+			id = #{id}
+  </update>
+  
+  <!-- 删除 -->
+  <delete id="deleteByExample" >
+    delete from student where id=#{id}
+  </delete>
+  
+    <!-- 批量删除 -->
+  <delete id="deleteByExampleBanch" >
+	  	<!--  delete from student where id in (1,2,3,4) -->
+	    delete from student where id in
+	    <foreach collection="idList" open="(" separator="," close=")" item="idValue">
+	    	#{idValue}<!-- 循环list数组 -->
+	    </foreach>
+   </delete>
+  
+  
+    <!-- 查询一条(根据主键)-->
+   <select id="selectByPrimaryKey"  resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from student  where id=#{id}
+  </select>
+  
+  <!-- 查询（获取总数 ）-->
+   <select id="countByExample"  resultType="java.lang.Long">
+     select count(*) from student  
+    	 <include refid="Example_Where_Base" />
+  </select>
+  
+  <!-- 查询（模糊搜索） -->
+  <select id="selectByExample" resultMap="BaseResultMap" >
+	    select
+	    <include refid="Base_Column_List" />
+	    from student
+	    where name like concat('%',#{student.name},'%')
+	    <if test="orderByClause != null">
+	      order by ${orderByClause}
+	    </if>
+  </select>
+  
+   <!-- 查询（所有） -->
+  <select id="listAll" resultMap="BaseResultMap" >
+	    select
+	    <include refid="Base_Column_List" />
+	    from student
+  </select>
+  
+   <!-- 查询（所有）(带分页） -->
+   <!-- 	@RequestParam(value="sort",required=false)String  sort,//required=false作用：若没有传入sort参数，则默认sort=NULL的操作了 ,所以这里的sort！=null不会报错-->
+  <select id="listAllOrder" resultMap="BaseResultMap" >
+	    SELECT
+	    <include refid="Base_Column_List" />
+	    FROM student
+	    <!-- 搜索查询 -->
+	    <where>
+	   		<if test="searchName!=null">
+	       		AND name like concat('%',#{searchName},'%')
+	       </if>
+	       <if test="searchBeginDate!=null  and searchBeginDate!='' and searchEndDate!=null and searchEndDate!=''"><!-- 因为日期在js进行了截取，没选日期也会赋值'' -->
+	       		AND date BETWEEN #{searchBeginDate} and  #{searchEndDate}
+	       </if>
+   		</where>
+	    <!-- 默认排序 -->
+	    <if test="sort == null">
+	    	 ORDER BY id ASC 
+	    </if>
+	     <!-- 手动排序 -->
+	    <if test="sort != null">
+	    	  ORDER BY ${sort} ${sortOrder} 
+	    </if>
+  </select>
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>

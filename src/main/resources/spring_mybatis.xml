@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+ 
+	 
+	  <!--    
+			  一、引入外部属性文件。在spring_config.xml完成了
+	   -->
+
+	  
+	  <!-- 
+	  
+	 		二、配置一个druid的链接池 
+	 	
+	 		ps: “&”，在xml中这个是读不出的，正确写法将“&”转义“&amp;”：
+	 		
+	   -->
+	  <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"  init-method="init" destroy-method="close">
+	 	<property name="driverClassName" value="${db.driverClassName}"/>
+	 	<property name="url" value="${db.url}"/>
+	 	<property name="username" value="${db.name}"/>
+	 	<property name="password" value="${db.pass}"/>
+
+	 	<!-- 初始化连接数量 -->
+        <property name="initialSize" value="${druid.initialSize}" />
+        <!-- 最大并发连接数 -->
+        <property name="maxActive" value="${druid.maxActive}" />
+        <!-- 最大空闲连接数 -->
+        <!--   <property name="maxIdle" value="${druid.maxIdle}" /> -->
+        <!-- 最小空闲连接数 -->
+        <property name="minIdle" value="${druid.minIdle}" />
+        <!-- 配置获取连接等待超时的时间 -->     
+        <property name="maxWait" value="${druid.maxWait}" />
+        <!-- 超过时间限制是否回收 -->
+        <property name="removeAbandoned" value="${druid.removeAbandoned}" />
+        <!-- 超过时间限制多长； -->
+        <property name="removeAbandonedTimeout" value="${druid.removeAbandonedTimeout}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+        <!-- 用来检测连接是否有效的sql，要求是一个查询语句-->
+        <property name="validationQuery" value="${druid.validationQuery}" />
+        <!-- 申请连接的时候检测 -->
+        <property name="testWhileIdle" value="${druid.testWhileIdle}" />
+        <!-- 申请连接时执行validationQuery检测连接是否有效，配置为true会降低性能 -->
+        <property name="testOnBorrow" value="${druid.testOnBorrow}" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，配置为true会降低性能  -->
+        <property name="testOnReturn" value="${druid.testOnReturn}" />
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />     
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+        <!--属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：                 
+		                监控统计用的filter:stat
+		                日志用的filter:log4j
+		               防御SQL注入的filter:wall -->
+        <property name="filters" value="${druid.filters}" />
+	  </bean>
+	  
+	  
+	  <!-- 
+	  
+	  		三、Spring整合Mybatis配置 
+	  		
+	  -->
+	   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  	   <!-- 注入数据库连接池 -->
+	       <property name="dataSource" ref="dataSource" />
+	       <!-- 扫描MyBatis全局配置文件（核心配置文件），分页插件等 -->  
+      	   <property name="configLocation" value="classpath:spring/mybaits_config.xml"/>
+	       <!-- 自动扫描entity目录，使用别名。功能：将resultType=com.dy.entity.User简化为resultType=ser--> 
+	       <property name="typeAliasesPackage">  
+			    <array>  
+			        <value>com.gz.ssm.entity</value>  
+			    </array>  
+			</property>
+	       <!-- 扫描mybatis的SQL配置文件（扫描指定*Mapper.xml文件位置）  -->
+	       <property name="mapperLocations">
+	            <list>
+	                <value>classpath*:/mapper/*.xml</value>
+	            </list>
+          </property>
+	   </bean>
+	   
+	  
+	  <!-- 扫描Dao接口包，动态实现Dao接口，注入到Spring IoC容器中（MyBatis 动态实现） ，通过使用Mapper接口对应到mapper.xml中的操作。 -->
+	  <!-- 白话解释：将 basePackage的value值对应的包下的接口在tomcat启动后全部自动加入到Spring IoC容器中，等于都贴了@Component注解，在其他地方用@autowire就可以使用这些接口了。 -->
+      <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+          <!-- 扫描所有dao接口的实现加入到IoC容器，对dao 接口动态实现，需要知道接口在哪  -->
+          <property name="basePackage" value="com.gz.ssm.dao"/>
+      </bean>
+      
+      <!-- 配置sqlSession，作用不大，可以获取sqlSession而已 -->
+      <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+      	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+        <!-- <constructor-arg name="executorType" value="BATCH"></constructor-arg>-->
+      </bean>
+      
+    
+	  <!-- 
+	  
+	  		四、事务TX注解解析器 （spring事务管理器）
+	  		
+	  		1、WHAT下面做 ,2 WHEN 和 3 WHERE直接通过注解在业务层实现类中实现：贴个@Transactional在类上即可。
+	  		
+	  		2、DataSourceTransactionManager事务组件用于JDBC和MyBatis。
+	  		
+	  		3、ps：因为无法去org.springframework.jdbc.datasource.DataSourceTransactionManager类中贴上@Component,所以只能用xml方式将这个DataSourceTransactionManager类交给Spring IoC容器管理 
+	  		
+	  
+	  -->
+	  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	  	 <!-- 事务会取消自动提交机制，和回滚和提交等功能，都和数据库有关，所以要控住数据源 -->
+	  	 <property name="dataSource" ref="dataSource" />
+	  </bean>
+	  <!-- 事务注解，要使用事务注解方式，就必须添加这句事务解析器来解释@Transactional  -->
+	  <tx:annotation-driven transaction-manager="txManager"/>
+ 
+	 
+</beans>

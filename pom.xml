@@ -1,0 +1,279 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.gz.maven</groupId>
+	<artifactId>GzMavenSSM</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<!-- 统一编码 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- 设置JDK版本 -->
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+		<maven.compiler.compileVersion>8</maven.compiler.compileVersion>
+		
+		<!-- Spring和SpringMVC版本 -->
+	    <spring.version>5.0.8.RELEASE</spring.version>
+	    <!-- mysql版本 -->
+	    <mysql.version>5.0.4</mysql.version>
+	    <!-- MyBatis版本 -->
+	    <mybatis.version>3.4.4</mybatis.version>
+	    <!-- druid连接池版本 -->
+ 		<druid.version>1.1.10</druid.version>
+ 		<!-- servlet版本 -->
+        <servlet.version>4.0.1</servlet.version>
+        <!-- jsp版本 -->
+        <jsp.version>2.2</jsp.version>
+        <!-- JSTL版本 -->
+        <jstl.version>1.2</jstl.version>
+        <!-- jackson-core版本 -->
+        <jacksoncore.version>2.9.6</jacksoncore.version>
+        <!-- log4j日志版本 -->
+        <log4j.version>1.2.17</log4j.version>
+        <!-- log4j2日志版本 -->
+        <log4j2.version>2.11.1</log4j2.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <!-- 单元测试版本-->
+        <junit.version>5.3.0-M1</junit.version>
+ 
+	    
+	</properties>
+
+
+	<dependencies>
+	
+	<!-- 第一部分：Spring配置 -->
+	    <!-- Spring Core -->
+   		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+ 		<!-- Spring mvc-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring单元测试,添加后可在src/test模块下使用 @ContextConfiguration注解-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+ 
+		
+	<!-- 第二部分: Servlet Web-->
+		<!-- servlet在tomcat中有，所以这里scope设置下，发布后就用tomcat的了。设置servlet后jsp文件才不会报错 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${jsp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<!--处理json数据  -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${jacksoncore.version}</version>
+		</dependency>
+	 
+		
+
+ 	<!-- 第三部分： 数据库和mybatis-->	
+ 		<!-- 数据库 -->			
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<!-- 阿里巴巴的数据库连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<!-- mybatis持久层框架ORM -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<!-- Mybatis整合spring适配包 https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<!-- MyBatis generator(MBG)逆向生成器，由数据库反生成JavaBean，自己写javabean也成，这样就是快点，如果数据库表多了就会更省力 -->
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>1.3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 插件 -->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+		<!-- 分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>5.1.4</version>
+		</dependency>
+		<!-- springMVC的数据校验JSR303 -->
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>6.0.12.Final</version>
+		</dependency>
+				
+
+
+	<!-- 第四部分： 日志(分为slf4j,log4j,log4j2)-->
+		<!-- slf4j日志包-->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>${slf4j.version}</version>
+		</dependency>
+		<!-- 引入slf4j和log4j的中间适配器-->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>${slf4j.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- 引入log4j日志包（被2替换了）-->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>${log4j.version}</version>
+		</dependency>
+ 		<!-- 引入log4j2日志包-->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		   <version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-web</artifactId>
+		    <version>${log4j2.version}</version>
+		</dependency>
+
+		
+		
+
+
+
+	<!-- 第五部分： 单元测试-->
+		<!--
+		
+		Junit5版本单元测试
+
+		JUnit 5 = JUnit Platform + JUnit Jupiter + JUnit Vintage
+		
+		这看上去比Junit4 复杂，实际上在导入包时也会复杂一些。
+		
+		JUnit Platform是在JVM上启动测试框架的基础。
+		JUnit Jupiter是JUnit5扩展的新的编程模型和扩展模型，用来编写测试用例。Jupiter子项目为在平台上运行Jupiter的测试提供了一个TestEngine （测试引擎）。
+		JUnit Vintage提供了一个在平台上运行JUnit 3和JUnit 4的TestEngine 。
+		 -->
+		<dependency>
+		    <groupId>org.junit.platform</groupId>
+		    <artifactId>junit-platform-launcher</artifactId>
+		    <version>1.3.0-M1</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-engine</artifactId>
+		    <version>5.3.0-M1</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.junit.vintage</groupId>
+		    <artifactId>junit-vintage-engine</artifactId>
+		    <version>5.3.0-M1</version>
+		    <scope>test</scope>
+		</dependency>
+
+ 
+ 
+
+
+	<!-- 第六部分：其他-->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.1</version>
+		</dependency> 
+ 
+
+	</dependencies>
+</project>
