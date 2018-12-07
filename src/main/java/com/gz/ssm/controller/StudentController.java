@@ -167,11 +167,11 @@ import javafx.scene.control.Alert;
 		Map<String,Object> mapErr=new HashMap<>();
 		
 		//1、检查用户名是否重复(非jsr303校验所以只能写这里）
-		Long count=studentService.countByName(student);
-		if(count>0) {
-			mapErr.put("nameUniqueErr", "用户名重复");
-			return AjaxMsg.ajaxResultFaild().addResultMap("errors", mapErr);
-		}
+		//Long count=studentService.countByName(student);
+	//	if(count>0) {
+			//mapErr.put("nameUniqueErr", "用户名重复");
+			//return AjaxMsg.ajaxResultFaild().addResultMap("errors", mapErr);
+		//}
 		/**
 		 * {
 				"code": 100,
@@ -185,7 +185,7 @@ import javafx.scene.control.Alert;
 		 * {"code":100,"msg":"faild","resultMap":{"nameUniqueErr":"用户名重复"}}
 		 */
 		
-		if(result.hasErrors()) {
+	/*	if(result.hasErrors()) {
 			//2、JSR303字段检验不合格
 			
 			List<FieldError> errors=result.getFieldErrors();
@@ -198,7 +198,7 @@ import javafx.scene.control.Alert;
 			}
 			
 			return AjaxMsg.ajaxResultFaild().addResultMap("errors", mapErr);
-			/**
+			*//**
 			 * -返回前端的json格式数据
 			 * {
 					"code": 100,
@@ -216,8 +216,8 @@ import javafx.scene.control.Alert;
 				if(undefined!=_response.resultMap.errors.name){//定义了说明出错了
 					alert(_response.resultMap.errors.name);
 				}
-			 */
-		}else {
+			 *//*
+		}else {*/
 			
 			//3、用户名不重复，且JSR303字段检验合格后，新增学生
 			studentService.insert(student);
@@ -229,7 +229,7 @@ import javafx.scene.control.Alert;
 				return AjaxMsg.ajaxResultFaild();
 			}		 
 			//return count > 0 ?  AjaxMsg.ajaxResultSuccess().addResultMap("id", id): AjaxMsg.ajaxResultFaild();
-		}
+		//}
 		
 		
 	}

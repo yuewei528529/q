@@ -29,18 +29,13 @@
 <title>Insert title here</title>
 </head>
 <body> 
-<h1>bootstrap-table快速生成列表、分页、排序、导出、CRUD </h1>
-<h2>使用技术：ssm、bootstrap、bootstrap-table、jeDate、JQUery、AJAX</h2>
-<div class="alert alert-success" >CRUD的前端js校验没做（后端JSR303校验做了），参考本项目http://localhost/GzMavenSSM/student/listJson </div>
-<div class="alert alert-danger" >导出excel中，导出全部有问题，和数据量大导出中断问题。导出全部要显示all全部后再导出等于还是当初当前页 </div>
- <div class="alert alert-info" >时间查询最好加个范围，暂时没做</div>
 
 <div class="content">    
 	<div class="table-responsive"> 
 	
 		 <!-- 搜索框 -->     
 		 <div class="form-inline" id="form-search">
-		     <div class="form-group">
+<!-- 		     <div class="form-group">
 			     <label class="sr-only" for="product_line">没使用仅演示</label>
 			     <div class="input-group">
 				      <div class="input-group-addon">没使用仅演示</div>
@@ -48,17 +43,23 @@
 				     	 <option value="">请选择产品线...</option>
 				      </select>
 				  </div>
-			 </div>
+			 </div> -->
 		    
 		     <div class="form-group">
 			     <div class="input-group">
-				     <div class="input-group-addon">姓名查询</div>
+				     <div class="input-group-addon">项目名称</div>
 				     <input type="text" class="form-control" name="searchName"   placeholder="请输入姓名关键字..." />
+		     	 </div>
+		     </div>
+		    <div class="form-group">
+			     <div class="input-group">
+				     <div class="input-group-addon">供应商名称</div>
+				     <input type="text" class="form-control" name="searchgys"   placeholder="请输入姓名关键字..." />
 		     	 </div>
 		     </div>
 		      <div class="form-group">
 			     <div class="input-group">
-				     <div class="input-group-addon">时间范围</div>
+				     <div class="input-group-addon">暂无</div>
 				 	 <div class="jeinpbox"><input type="text" class="jeinput" name="searchDate" id="jeDateArea" placeholder=" YYYY-MM-DD hh:mm:ss" style="width:300px;height:33px;border:1px solid #CCCCCC;border-radius: 0 5px 5px 0;padding-left:10px"></div>
 		     	 </div>
 		     </div>
@@ -66,19 +67,19 @@
 		     <button type="button" class="btn btn-primary" id="queryButton">查询</button>
 	    </div>
  
-       <!-- 工具栏 -->      
+   <!--     工具栏      
        <select id="sel_exportoption" style="float:right;height:32px;position: relative;top:12px" >
                <option value="">导出当前页</option>
                <option value="basic">导出当前页</option>
                <option value="selected">导出选中数据</option>
                <option value="all">导出全部数据(bug,需要显示all后执行，等于导出当前页)</option>
          </select>   
- 
+ -->
 		<div id="toolbar" class="btn-group">   	     
 			<a href="javascript:void(0);" class="btn btn-primary" id="addA"><i class="glyphicon glyphicon-pencil"></i> 新增</a> 
 			<a href="#" class="btn btn-warning" id="updateA" ><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>  修改</a> 
 	        <a href="#" class="btn btn-danger " id="deleteA"><i class="glyphicon glyphicon-remove"></i> 删除</a> 
-        </div>
+        </div> 
         <!-- 工具栏 end-->  
        
         <!-- bootstrap-table表格 -->         
@@ -91,34 +92,110 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content" >
 	      <div class="modal-header">
-	        <h4 class="modal-title " id="myModalLabel" >新增学生（未做前端验证，参考上个项目：student/listJson）</h4>
+	        <h4 class="modal-title " id="myModalLabel" >新增合同信息</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      </div>		
 	      <div class="modal-body">
 		      <!-- 模态框自己内容：form提交表单begin -->  	
 		      <form class="form-horizontal" id="stu_insert_form" method="POST">
 				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+				    <label for="inputEmail3" class="col-sm-2 control-label">序号</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="name" placeholder="请输入姓名...">
+				      <input type="text" class="form-control" name="name" placeholder="请输入序号">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">年龄</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入年龄...">
+				      <input type="text" class="form-control" name="age" placeholder="请输入项目名称">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				   <div class="form-group">
-				 		<label for="inputPassword3" class="col-sm-2 control-label">日期</label>
+				 		<label for="inputPassword3" class="col-sm-2 control-label">合同编号</label>
 				 		<div class="col-sm-10">
-				 		    <!-- jeDate日期插件 ,jeDate:4/4  -->
-					        <input type="text" class="form-control jeinput" id="jeDateInputInsert" name="date" placeholder="日期格式：YYYY-MM-DD hh:mm:ss" /> 
-					        <span title="errText" ></span>
+				 		   <input type="text" class="form-control" name="age" placeholder="请输入合同编号">
+				      <span title="errText" ></span>
 					    </div>
 				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">供应商名称</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入供应商名称">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">货物名称</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入货物名称">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">单位</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入单位">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">数量</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入数量">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">单价（万元）</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入单价（万元）">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>		
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">合同总金额</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入合同金额">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>		
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">开票金额</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入开票金额">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">已付金额</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入已付金额">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">余额</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入余额">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+			  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">付款比例</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入付款比例">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+			  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">实际交货期</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="age" placeholder="请输入实际交货期">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>				  			  				  			  					  		  		  				  		  				  
 			  </form>
 		      <!-- 模态框自己内容：form提交表单end -->  		
 	      </div>
@@ -358,7 +435,7 @@ function _bootstrap_table(_pageNum){
                      rowspan: 1
                  },
                  {
-                     title: "操作",
+                     title: "付款信息",
                      align:"center",
                      colspan: 10,
                      rowspan: 1
@@ -366,18 +443,16 @@ function _bootstrap_table(_pageNum){
              ],
              //数据字段
 			 [
-				 {checkbox: true, visible: true,width:"160",valign:"center"}, //是否显示复选框  ，包括全选功能
+				 {checkbox: true, visible: true,valign:"center"}, //是否显示复选框  ，包括全选功能
 				 
-				 {field: 'id',title: 'id',align: 'center', sortable: true}, 
-				 
-				 {field: 'hetongbh',title: '合同编号',align: 'center',valign:'middle', sortable: true,//设置内容的水平和垂直位置
-						 //设置每列样式
-						 cellStyle:{
-								css:{"color":"red"}
-						 },
-						 //自定义显示
+				 {field: 'id1',title: '序号',align: 'center', sortable: true}, 
+				 {field: 'xiangmumc',title: '项目名称',align: 'center', sortable: true, 
+						//底部合计，需开启 showFooter: true,
 
-				         
+				 },
+				 {field: 'hetongbh',title: '合同编号',align: 'center', sortable: true,//设置内容的水平和垂直位置
+					
+				
 				 },
 				 
 				 {field: 'shoukdanw',title: '供应商名称',align: 'center', sortable: true, 
@@ -399,8 +474,8 @@ function _bootstrap_table(_pageNum){
 				 {field: 'shuliang',title: '数量',align: 'center', sortable: true},
 				 {field: 'danjia',title: '单价',align: 'center', sortable: true},
 				 {field: 'kaipjiner',title: '开票金额',align: 'center', sortable: true},
-				 {field: 'sjjhq',title: '实际交货期',align: 'center', sortable: true}, */
-				 
+				 {field: 'sjjhq',title: '实际交货期',align: 'center', sortable: true},
+				 */
 				 {field: 'tool',title: '操作', align: 'center',
 					formatter:function(value,row,index){//row: 行数据(row.age,row.id,row.name),index: 行下标(第几行就是几)
 					    var element = 
@@ -408,7 +483,7 @@ function _bootstrap_table(_pageNum){
 					    "<a class='delet btn btn-danger' data-id='"+row.id +"'> <span class='glyphicon glyphicon-remove' aria-hidden='true'></span> 删除（没做）</a> ";
 					    return element;  
 					} 
-				  }
+				  } 
 			 ]
 		 ],
 		 uniqueId: "id",                     //每一行的唯一标识，一般为主键列<tr data-uniqueid="2"></tr>
@@ -433,7 +508,7 @@ function _bootstrap_table(_pageNum){
 		         sortOrder: params.sortOrder, 	//排位命令（desc，asc） 
 		         //查询
 		         searchName:$("#form-search input[name=searchName]").val(),//搜索姓名
-		         searchBeginDate:$("#form-search input[name=searchDate]").val().substring(0,19),//开始时间，原始：2018-09-21 12:53:23 至 2018-10-27 03:11:06，截取时间
+		         searchBeginDate:$("#form-search input[name=searchgys]").val(),//开始时间，原始：2018-09-21 12:53:23 至 2018-10-27 03:11:06，截取时间
 			 	 searchEndDate:$("#form-search input[name=searchDate]").val().substring(22,49)//结束时间
  
 		     };

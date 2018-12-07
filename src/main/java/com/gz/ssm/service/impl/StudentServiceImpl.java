@@ -33,7 +33,8 @@ public class StudentServiceImpl implements StudentService{
 	@Override 
 	public Long insert(Student student) {
 		//System.out.println("s"+student);
-		return studentMapper.insertSelective(student);
+		//return studentMapper.insertSelective(student);
+		return studentMapper.insert(student);
 	}
 
 	@Override

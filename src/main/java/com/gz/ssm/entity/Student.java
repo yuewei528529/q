@@ -27,9 +27,9 @@ public class Student {
 		super();
 	}
 
-	public Student(String name, Integer age, Date date,Long hetongjiner,
+	public Student(String name, Integer age, Date date,String hetongjiner,
 			String xiangmumc,String shoukdanw,String yongtu,String fukuanbili,String yifujiner,String yifubili,String yuer
-			,String hetongbh,String danw,Long shuliang,Long danjia,Long kaipjiner,String sjjhq) {
+			,String hetongbh,String danw,String shuliang,String danjia,String kaipjiner,String sjjhq,String id1) {
 		super();
 		this.name = name;
 		this.age = age;
@@ -48,8 +48,9 @@ public class Student {
 		this.danjia = danjia;	
 		this.kaipjiner = kaipjiner;	
 		this.sjjhq = sjjhq;
+		this.id1 = id1;
 	}
-	private Long hetongjiner;
+	private String hetongjiner;
 	private Long id;
     private String xiangmumc;
     private String shoukdanw;
@@ -60,10 +61,11 @@ public class Student {
     private String yuer;  
     private String    hetongbh;
     private String danw;  
-    private Long shuliang;  
-    private Long danjia;  
-    private Long kaipjiner;  
+    private String shuliang;  
+    private String danjia;  
+    private String kaipjiner;  
     private String sjjhq;  
+    private String id1;    
 	//String类型使用正则来验证比较合适，验证的内容必须符合数据类型，不然报错
 	@Pattern(regexp="^[a-zA-Z0-9_-]{4,16}$",message="用户名可以是4-16位字母或数字组成(后端jsr303验证）")
     private String name;
@@ -129,11 +131,11 @@ public class Student {
         this.date = date;
     }
     
-    public Long gethetongjiner() {
+    public String gethetongjiner() {
         return hetongjiner;
     }
 
-    public void sethetongjiner(Long hetongjiner) {
+    public void sethetongjiner(String hetongjiner) {
         this.hetongjiner = hetongjiner;
     }
     
@@ -208,26 +210,26 @@ public class Student {
         this.danw = danw;
     }     
     
-    public Long getshuliang() {
+    public String getshuliang() {
         return shuliang;
     }
 
-    public void setshuliang(Long shuliang) {
+    public void setshuliang(String shuliang) {
         this.shuliang = shuliang;
     }    
     
-    public Long getdanjia() {
+    public String getdanjia() {
         return danjia;
     }
 
-    public void setdanjia(Long danjia) {
+    public void setdanjia(String danjia) {
         this.danjia = danjia;
     }      
-    public Long getkaipjiner() {
+    public String getkaipjiner() {
         return kaipjiner;
     }
 
-    public void setkaipjiner(Long kaipjiner) {
+    public void setkaipjiner(String kaipjiner) {
         this.kaipjiner = kaipjiner;
     }     
     
@@ -239,6 +241,13 @@ public class Student {
         this.sjjhq = sjjhq;
     }    
     
+    public String getid1() {
+        return id1;
+    }
+
+    public void setid1(String id1) {
+        this.id1 = id1;
+    }       
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", date=" + date + "]";
