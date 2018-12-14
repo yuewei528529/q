@@ -222,12 +222,12 @@ import javafx.scene.control.Alert;
 			//3、用户名不重复，且JSR303字段检验合格后，新增学生
 			studentService.insert(student);
 			Long id=student.getId();
-			System.out.println(id);
-			if(id>0) {
+			//System.out.println(id);
+			//if(id>0) {
 			   return AjaxMsg.ajaxResultSuccess().addResultMap("id", id); 
-			}else {
-				return AjaxMsg.ajaxResultFaild();
-			}		 
+			//}else {
+			//	return AjaxMsg.ajaxResultFaild();
+			//}		 
 			//return count > 0 ?  AjaxMsg.ajaxResultSuccess().addResultMap("id", id): AjaxMsg.ajaxResultFaild();
 		//}
 		
@@ -277,6 +277,7 @@ import javafx.scene.control.Alert;
 	public AjaxMsg update(Student student) {
 		System.out.println(student);//Student [id=1, name=习近平, age=99, date=Thu Sep 06 00:38:21 CST 2018],jsp传递过来的Json数据：name=习近平1&age=99&date=2018-09-01 00:38:21&id=1，springMVC根据student对象的属性自动装配
 		int backNum=studentService.update(student);
+		System.out.println("oooooooo"+student.getId());
 		return backNum>0?AjaxMsg.ajaxResultSuccess():AjaxMsg.ajaxResultFaild();
  
 	}
@@ -286,6 +287,7 @@ import javafx.scene.control.Alert;
 	@ResponseBody
 	@GetMapping("/delete")
 	public AjaxMsg delete(Long id) {
+		System.out.println("oooooooo"+id);
 		int backNum=studentService.delete(id);
 		return backNum>0?AjaxMsg.ajaxResultSuccess():AjaxMsg.ajaxResultFaild();
 	}

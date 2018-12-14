@@ -128,6 +128,49 @@
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
       </if>
+            <if test="id1 != null">
+        id1 = #{id1,jdbcType=VARCHAR},
+      </if>
+            <if test="hetongbh != null">
+        hetongbh = #{hetongbh,jdbcType=VARCHAR},
+      </if>
+            <if test="shoukdanw != null">
+        shoukdanw = #{shoukdanw,jdbcType=VARCHAR},
+      </if>
+            <if test="yongtu != null">
+        yongtu = #{yongtu,jdbcType=VARCHAR},
+      </if>
+            <if test="danw != null">
+        danw = #{danw,jdbcType=VARCHAR},
+      </if>
+            <if test="shuliang != null">
+        shuliang = #{shuliang,jdbcType=VARCHAR},
+      </if>
+            <if test="danjia != null">
+        danjia = #{danjia,jdbcType=VARCHAR},
+      </if>
+            <if test="hetongjiner != null">
+        hetongjiner = #{hetongjiner,jdbcType=VARCHAR},
+      </if>
+            <if test="kaipjiner != null">
+        kaipjiner = #{kaipjiner,jdbcType=VARCHAR},
+      </if>
+       <if test="yifujiner != null">
+        yifujiner = #{yifujiner,jdbcType=VARCHAR},
+      </if>
+             <if test="yuer != null">
+        yuer = #{yuer,jdbcType=VARCHAR},
+      </if>
+             <if test="yifubili != null">
+        yifubili = #{yifubili,jdbcType=VARCHAR},
+      </if>
+             <if test="sjjhq != null">
+        sjjhq = #{sjjhq,jdbcType=VARCHAR},
+      </if>
+             <if test="xiangmumc != null">
+        xiangmumc = #{xiangmumc,jdbcType=VARCHAR},
+      </if>
+
     </set>
     where 
 			id = #{id}
@@ -184,7 +227,7 @@
   <select id="listAllOrder" resultMap="BaseResultMap" >
 	    SELECT
 	    <include refid="Base_Column_List" />
-	    FROM student
+	    FROM studenta
 	    <!-- 搜索查询 -->
 	    <where>
 	   		<if test="searchName!=null">

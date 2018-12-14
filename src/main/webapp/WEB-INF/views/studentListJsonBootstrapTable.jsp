@@ -16,7 +16,7 @@
 <!-- bootstrap-table-export数据导出 -->
 <script type="text/javascript" src="${APP_PATH }/static/bootstrap-table/bootstrap-table-export.min.js"></script> 
 <script type="text/javascript" src="${APP_PATH }/static/bootstrap-table/tableExport.js"></script> 
- 
+<%-- <script type="text/javascript" src="${APP_PATH }/static/bootstrap-table/tableExport.js"></script>   --%>
  
 <!--jeDate日期选择jquery插件
 	1、使用：共4步,第一步：加载jedate.js核心文件，第二步：加载jedate.css样式，第三步，jquery中加载jeDate，第四步：html中使用jeDate  
@@ -29,7 +29,7 @@
 <title>Insert title here</title>
 </head>
 <body> 
-
+console.log("eeeeeeeeeee");
 <div class="content">    
 	<div class="table-responsive"> 
 	
@@ -57,7 +57,7 @@
 				     <input type="text" class="form-control" name="searchgys"   placeholder="请输入姓名关键字..." />
 		     	 </div>
 		     </div>
-		      <div class="form-group">
+		      <div class="form-group hidden">
 			     <div class="input-group">
 				     <div class="input-group-addon">暂无</div>
 				 	 <div class="jeinpbox"><input type="text" class="jeinput" name="searchDate" id="jeDateArea" placeholder=" YYYY-MM-DD hh:mm:ss" style="width:300px;height:33px;border:1px solid #CCCCCC;border-radius: 0 5px 5px 0;padding-left:10px"></div>
@@ -77,8 +77,7 @@
  -->
 		<div id="toolbar" class="btn-group">   	     
 			<a href="javascript:void(0);" class="btn btn-primary" id="addA"><i class="glyphicon glyphicon-pencil"></i> 新增</a> 
-			<a href="#" class="btn btn-warning" id="updateA" ><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>  修改</a> 
-	        <a href="#" class="btn btn-danger " id="deleteA"><i class="glyphicon glyphicon-remove"></i> 删除</a> 
+
         </div> 
         <!-- 工具栏 end-->  
        
@@ -101,98 +100,98 @@
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">序号</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="name" placeholder="请输入序号">
+				      <input type="text" class="form-control" name="id1" placeholder="请输入序号">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="inputPassword3" class="col-sm-2 control-label">年龄</label>
+				    <label for="xiangmumc" class="col-sm-2 control-label">项目名称</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入项目名称">
+				      <input type="text" class="form-control" name="xiangmumc" placeholder="请输入项目名称">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				   <div class="form-group">
 				 		<label for="inputPassword3" class="col-sm-2 control-label">合同编号</label>
 				 		<div class="col-sm-10">
-				 		   <input type="text" class="form-control" name="age" placeholder="请输入合同编号">
+				 		   <input type="text" class="form-control" name="hetongbh" placeholder="请输入合同编号">
 				      <span title="errText" ></span>
 					    </div>
 				  </div>
 				  	 <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">供应商名称</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入供应商名称">
+				      <input type="text" class="form-control" name="shoukdanw" placeholder="请输入供应商名称">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				  	 <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">货物名称</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入货物名称">
+				      <input type="text" class="form-control" name="yongtu" placeholder="请输入货物名称">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				  	 <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">单位</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入单位">
+				      <input type="text" class="form-control" name="danw" placeholder="请输入单位">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>	
 				  	 <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">数量</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入数量">
+				      <input type="text" class="form-control" name="shuliang" placeholder="请输入数量">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				  	 <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">单价（万元）</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入单价（万元）">
+				      <input type="text" class="form-control" name="danjia" placeholder="请输入单价（万元）">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>		
-				  	 <div class="form-group">
-				    <label for="inputPassword3" class="col-sm-2 control-label">合同总金额</label>
+				  	 <div class="form-group hidden">
+				    <label for="inputPassword3" class="col-sm-2 control-label ">合同总金额</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入合同金额">
+				      <input type="text" class="form-control" name="hetongjiner" placeholder="请输入合同金额">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>		
 				  	 <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">开票金额</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入开票金额">
+				      <input type="text" class="form-control" name="kaipjiner" placeholder="请输入开票金额">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				  	 <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">已付金额</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入已付金额">
+				      <input type="text" class="form-control" name="yifujiner" placeholder="请输入已付金额">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>	
-				  	 <div class="form-group">
+				  	 <div class="form-group hidden">
 				    <label for="inputPassword3" class="col-sm-2 control-label">余额</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入余额">
+				      <input type="text" class="form-control" name="yuer" placeholder="请输入余额">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>	
-			  	 <div class="form-group">
+			  	 <div class="form-group hidden">
 				    <label for="inputPassword3" class="col-sm-2 control-label">付款比例</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入付款比例">
+				      <input type="text" class="form-control" name="yifubili" placeholder="请输入付款比例">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>	
 			  	 <div class="form-group">
 				    <label for="inputPassword3" class="col-sm-2 control-label">实际交货期</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入实际交货期">
+				      <input type="text" class="form-control" name="sjjhq" placeholder="请输入实际交货期">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>				  			  				  			  					  		  		  				  		  				  
@@ -210,45 +209,115 @@
 	
 	<!-- bootstrap模态框  -->
 	<!-- 修改学生模态框 -->
-	<div class="modal fade" id="myUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  >
+	<div class="modal fade" id="myUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content" >
 	      <div class="modal-header">
-	        <h4 class="modal-title " id="myModalLabel" >修改学生（未做前端验证，参考上个项目：student/listJson）</h4>
+	        <h4 class="modal-title " id="myModalLabel" >修改合同信息</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      </div>		
 	      <div class="modal-body">
 		      <!-- 模态框自己内容：form提交表单begin -->  	
-		      <form class="form-horizontal" id="stu_update_form">
-		      	  <div class="form-group">
-				    <label class="col-sm-2 control-label">id</label>
-				    <div class="col-sm-10">
-				      <p class="form-control-static" id="updateId">1</p>
-				    </div>
-				  </div>
+		      <form class="form-horizontal" id="stu_update_form" method="POST">
 				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+				    <label for="inputEmail3" class="col-sm-2 control-label">序号</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="name" placeholder="请输入姓名...">
+				      <input type="text" class="form-control" name="id1" placeholder="请输入序号">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="inputPassword3" class="col-sm-2 control-label">年龄</label>
+				    <label for="xiangmumc" class="col-sm-2 control-label">项目名称</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="age" placeholder="请输入年龄...">
+				      <input type="text" class="form-control" name="xiangmumc" placeholder="请输入项目名称">
 				      <span title="errText" ></span>
 				    </div>
 				  </div>
 				   <div class="form-group">
-				 		<label for="inputPassword3" class="col-sm-2 control-label">日期</label>
+				 		<label for="inputPassword3" class="col-sm-2 control-label">合同编号</label>
 				 		<div class="col-sm-10">
-				 		    <!-- jeDate日期插件 ,jeDate:4/4  -->
-					        <input type="text" class="form-control jeinput" id="jeDateInputUpdate" name="date" placeholder="日期格式：YYYY-MM-DD hh:mm:ss" /> 
-					        <span title="errText" ></span>
+				 		   <input type="text" class="form-control" name="hetongbh" placeholder="请输入合同编号">
+				      <span title="errText" ></span>
 					    </div>
 				  </div>
-				  <input type="hidden" class="form-control" name="id"  />
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">供应商名称</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="shoukdanw" placeholder="请输入供应商名称">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">货物名称</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="yongtu" placeholder="请输入货物名称">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">单位</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="danw" placeholder="请输入单位">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">数量</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="shuliang" placeholder="请输入数量">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">单价（万元）</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="danjia" placeholder="请输入单价（万元）">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>		
+				  	 <div class="form-group hidden">
+				    <label for="inputPassword3" class="col-sm-2 control-label">合同总金额</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="hetongjiner" placeholder="请输入合同金额">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>		
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">开票金额</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="kaipjiner" placeholder="请输入开票金额">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>
+				  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">已付金额</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="yifujiner" placeholder="请输入已付金额">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+				  	 <div class="form-group hidden">
+				    <label for="inputPassword3" class="col-sm-2 control-label">余额</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="yuer" placeholder="请输入余额">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+			  	 <div class="form-group hidden">
+				    <label for="inputPassword3" class="col-sm-2 control-label">付款比例</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="yifubili" placeholder="请输入付款比例">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+			  	 <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">实际交货期</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="sjjhq" placeholder="请输入实际交货期">
+				      <span title="errText" ></span>
+				    </div>
+				  </div>	
+				  <input type="text" class="hidden" name="id" placeholder="id">			  			  				  			  					  		  		  				  		  				  
 			  </form>
 		      <!-- 模态框自己内容：form提交表单end -->  		
 	      </div>
@@ -294,11 +363,11 @@ $(function(){
 	});
 	
 	//jeDate日期选择jquery插件,jeDate:3/4  
-    _jeDate();
+    //_jeDate();
 	
 	//"确定删除"按钮事件(单个，批量删除)
 	$("#deleteA").click(function(){
-		_stu_delete_banch();
+		_stu_delete_banch( c);
 	});
 	
 	 //初始化导出下拉框select的change事件
@@ -342,7 +411,7 @@ function _bootstrap_table(_pageNum){
 		sortOrder: "asc",     //排序方式
 		pageNumber:_pageNum,      //初始化加载第一页，默认第一页
 		pageSize: 10,      //每页的记录行数（*）
-		pageList: [5,10,15,20,50,100,200],  //可供选择的每页的行数 pageList: [5,10,15,20,50,100,200,'all']
+		pageList: [5,10,15,20,50,80,100,200],  //可供选择的每页的行数 pageList: [5,10,15,20,50,100,200,'all']
 		
 		//【样式设置】
 		/* 
@@ -398,9 +467,9 @@ function _bootstrap_table(_pageNum){
 	    //exportTypes:['csv', 'txt', 'sql', 'doc', 'excel', 'xlsx', 'pdf'],//规定导出文件类型,导出xmls格式：https://blog.csdn.net/javayoucome/article/details/80081771
 	    exportOptions:{
 	          ignoreColumn: [0,5],  //忽略某一列的索引
-	          fileName: '学生报表',  //文件名称设置
+	          fileName: '合同报表',  //文件名称设置
 	          worksheetName: 'sheet1',  //表格工作区名称
-	          tableName: '学生帐报表',
+	          tableName: '合同帐报表',
 	          //excelstyles: ['background-color', 'color', 'font-size', 'font-weight']//保持表格样式 ,必须使用tableExport.js，不能用tableExport.min.js（缺点：导出表格比较大）
 	      },
 	 
@@ -419,19 +488,13 @@ function _bootstrap_table(_pageNum){
             ],
             //二级表头（可不加）
             [
-                 {
-                     title: "全选/取消",
-                     valign:"middle",
-                     align:"center",
-                     colspan: 1,
-                     rowspan: 1
-                 },
+                 
                  {
                 	  //field: 'name',
                      title: "基础信息",
                      valign:"middle",
                      align:"center",
-                     colspan: 4,
+                     colspan: 5,
                      rowspan: 1
                  },
                  {
@@ -443,7 +506,7 @@ function _bootstrap_table(_pageNum){
              ],
              //数据字段
 			 [
-				 {checkbox: true, visible: true,valign:"center"}, //是否显示复选框  ，包括全选功能
+				// {checkbox: true, visible: true,valign:"center"}, //是否显示复选框  ，包括全选功能
 				 
 				 {field: 'id1',title: '序号',align: 'center', sortable: true}, 
 				 {field: 'xiangmumc',title: '项目名称',align: 'center', sortable: true, 
@@ -464,10 +527,56 @@ function _bootstrap_table(_pageNum){
 				 {field: 'danw',title: '单位',align: 'center', sortable: true},
 				 {field: 'shuliang',title: '数量',align: 'center', sortable: true},
 				 {field: 'danjia',title: '单价（万元）',align: 'center', sortable: true},
-				 {field: 'hetongjiner',title: '合同总金额（万元）',align: 'center', sortable: true},
-				 {field: 'kaipjiner',title: '开票金额',align: 'center', sortable: true},
-				 {field: 'yifujiner',title: '已付金额',align: 'center', sortable: true},
-				 {field: 'yuer',title: '余额',align: 'center', sortable: true},
+				 {field: 'hetongjiner',title: '合同总金额（万元）',align: 'center', sortable: true,
+					 footerFormatter: function (value) { 
+						 var count = 0;
+				        for (var i in value) { 
+				        	if(!value[i].hetongjiner==null&&value[i].hetongjiner.indexOf(",")!=-1)
+				        	{
+				        		value[i].hetongjiner=value[i].hetongjiner.replace(/,/g, "");				        
+				        	}
+				        	
+				        	if(Number(value[i].hetongjiner)=="NaN")
+				        		value[i].hetongjiner=0;
+				        	count += Number(value[i].hetongjiner); 
+				        } 
+				        return "合同总额："+count;
+				    }
+				},
+				 {field: 'kaipjiner',title: '开票金额',align: 'center', sortable: true,
+					 footerFormatter: function (value) { var count = 0;
+				        for (var i in value) { 
+				        	if(!value[i].kaipjiner==null&&value[i].kaipjiner.indexOf(",")!=-1)
+				        	{
+				        		value[i].kaipjiner=value[i].kaipjiner.replace(/,/g, "");				        
+				        	}
+				        	
+				        	if(Number(value[i].kaipjiner)=="NaN"||value[i].kaipjiner==null){
+				        		value[i].kaipjiner=0;
+				        	}
+				        	count += Number(value[i].kaipjiner); 
+				        } 
+				        return "开票总额："+count;
+				    }},
+				 {field: 'yifujiner',title: '已付金额',align: 'center', sortable: true,
+						 footerFormatter: function (value) { var count = 0;
+					        for (var i in value) { 
+					        	if(Number(value[i].yifujiner)=="NaN")
+					        		value[i].yifujiner=0;
+					        	count += Number(value[i].yifujiner);
+					        } 
+					        return "已付总额："+count;
+					    }
+				    },
+				 {field: 'yuer',title: '余额',align: 'center', sortable: true,
+						 footerFormatter: function (value) { var count = 0;
+					        for (var i in value) { 
+					        	if(Number(value[i].yuer)=="NaN")
+					        		value[i].yuer=0;					        	
+					        	count += Number(value[i].yuer);
+					        } 
+					        return "余额总额："+count;
+					    }},
 				 {field: 'yifubili',title: '付款比例',align: 'center', sortable: true},
 				 {field: 'sjjhq',title: '实际交货期',align: 'center', sortable: true},
 				/*  {field: 'danw',title: '单位',align: 'center', sortable: true},
@@ -476,13 +585,11 @@ function _bootstrap_table(_pageNum){
 				 {field: 'kaipjiner',title: '开票金额',align: 'center', sortable: true},
 				 {field: 'sjjhq',title: '实际交货期',align: 'center', sortable: true},
 				 */
-				 {field: 'tool',title: '操作', align: 'center',
-					formatter:function(value,row,index){//row: 行数据(row.age,row.id,row.name),index: 行下标(第几行就是几)
-					    var element = 
-					    "<a class='edit btn btn-primary' data-id='"+row.id +"'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> 编辑（没做）</a> "+ 
-					    "<a class='delet btn btn-danger' data-id='"+row.id +"'> <span class='glyphicon glyphicon-remove' aria-hidden='true'></span> 删除（没做）</a> ";
-					    return element;  
-					} 
+				 {			field: 'operate',
+						title: '操作',
+						width: '80px',
+						events: operateEvents1,
+						formatter: operateFormatter
 				  } 
 			 ]
 		 ],
@@ -507,8 +614,8 @@ function _bootstrap_table(_pageNum){
 		         sort: params.sortName,      	//排序列名 name,age等要进行排序的列名
 		         sortOrder: params.sortOrder, 	//排位命令（desc，asc） 
 		         //查询
-		         searchName:$("#form-search input[name=searchName]").val(),//搜索姓名
-		         searchBeginDate:$("#form-search input[name=searchgys]").val(),//开始时间，原始：2018-09-21 12:53:23 至 2018-10-27 03:11:06，截取时间
+		         searchName:$.trim($("#form-search input[name=searchName]").val()),//搜索姓名
+		         searchBeginDate:$.trim($("#form-search input[name=searchgys]").val()),//开始时间，原始：2018-09-21 12:53:23 至 2018-10-27 03:11:06，截取时间
 			 	 searchEndDate:$("#form-search input[name=searchDate]").val().substring(22,49)//结束时间
  
 		     };
@@ -539,16 +646,49 @@ function _bootstrap_table(_pageNum){
 		 
  
 	
-	});
+	}); 
 	
 	//【补充设置：设置按钮等文字】
 	$("button[name=toggle]").append("切换样式");
 }
 
+window.operateEvents1 = {
+		 'click .RoleOfdelete': function (e, value, row, index) {
+			 alert("确认删除吗"); 
+			 _stu_delete_banch(row.id);
+			 }, 
+		 'click .RoleOfedit': function (e, value, row, index) {
+			 $("#myUpdateModal").modal('show'); 
+			 console.log("ssssssssssssss"+row.xiangmumc);
+			 $("#myUpdateModal form input[name=id1]").val(row.id1);
+			 $("#myUpdateModal form input[name=hetongbh]").val(row.hetongbh);
+			 $("#myUpdateModal form input[name=shoukdanw]").val(row.shoukdanw);
+			 $("#myUpdateModal form input[name=yongtu]").val(row.yongtu);
+			 $("#myUpdateModal form input[name=danw]").val(row.danw);
+			 $("#myUpdateModal form input[name=shuliang]").val(row.shuliang);
+			 $("#myUpdateModal form input[name=danjia]").val(row.danjia);
+			 $("#myUpdateModal form input[name=hetongjiner]").val(row.hetongjiner);
+			 $("#myUpdateModal form input[name=kaipjiner]").val(row.kaipjiner);
+			 $("#myUpdateModal form input[name=yifujiner]").val(row.yifujiner);
+			 $("#myUpdateModal form input[name=yuer]").val(row.yuer);
+			 $("#myUpdateModal form input[name=yifubili]").val(row.yifubili);
+			 $("#myUpdateModal form input[name=sjjhq]").val(row.sjjhq);
+			 $("#myUpdateModal form input[name=xiangmumc]").val(row.xiangmumc);
+			 $("#myUpdateModal form input[name=id]").val(row.id);
+	}
+}
+	function operateFormatter(value, row, index) {
+		return [
+			'<button id="btn_detail" type="button" class="RoleOfedit btn btn-primary  btn-sm">修改</button>',
+			'<button id="btn_detail1" type="button" class="RoleOfdelete btn btn-primary  btn-sm">删除</button>',
+		].join('');
+	}
+
+
 
 /*
  * jeDate日期选择jquery插件,jeDate:3/4  
- */
+
 function _jeDate(){
 	jeDate("#jeDateInputInsert",{
     	theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},//样式
@@ -580,7 +720,7 @@ function _jeDate(){
         multiPane:false,
         range:" 至 "
     });
-}
+} */
 
 /*
  * 点击修改按钮事件，显示模态框
@@ -685,7 +825,7 @@ function _update_stu_form(){
  * 新增学生按钮事件，显示模态框
  */
 function _stu_add_btn(){
-	
+
 	//1、清空模态框表单内容
 	$('form#stu_insert_form')[0].reset();//重置清空form表单中input的value内容，reset是js的，jquery没有，所以用【0】获取dom对象。
 	//2、清空校验样式，错误提示文字
@@ -706,9 +846,21 @@ function _stu_add_btn(){
  * 新增提交事件
  */
 function _stu_add_form(){
- 
+	var  tem=false ;
+
+	if($("#stu_insert_form input[name=shoukdanw]").val()=="")
+	{alert("供应商不能为空"); 
+	return  }
+	if($("#stu_insert_form input[name=id1]").val()=="")
+	{alert("序号不能为空"); 
+	return  }	
+	if($("#stu_insert_form input[name=xiangmumc]").val()=="")
+	{alert("项目名称不能为空"); 
+	return  }		
+	
 		//serialize序列化，获取表单中所有name对应的value值:name=钉钉&age=112&date=2018-09-06T11:22
 		console.log(decodeURIComponent($("form#stu_insert_form").serialize(),true));
+		
  
 		$.ajax({
 			async: false,//将ajax异步传输改成同步传输。默认是true：异步（或不写这句），false：同步。将ajax异步传输改成同步传输的话，则必须执行完ajax程序后才会执行后面的，不加则是异步传输同步进行。
@@ -727,7 +879,11 @@ function _stu_add_form(){
 			dataType:'json',//返回类型，有html，json，xml，text，如果返回的内容不符，则执行error的内容
 			
 			 //请求前的处理
-			beforeSend: function() {	
+			beforeSend: function() {
+				
+			
+					
+					  
 				//加载中提醒
 				_loadTip("loading","添加中...","red");					
 		    },
@@ -802,9 +958,9 @@ function _stu_add_form(){
 /*
  * -批量删除
  */
-function _stu_delete_banch(){
+function _stu_delete_banch( c){
 	
-	//获取要删除的id字符串
+	/* //获取要删除的id字符串
 	var _delete_id_row="";//要删除的id字符串
 	var _delete_name_row="";//要删除的名字，仅用于显示
 	//var _delete_id_array= new Array();//要删除的id数组
@@ -816,7 +972,7 @@ function _stu_delete_banch(){
 		0: {0: true, id: 2, name: "高晓松1", age: 26, date: "2018-09-04 05:23:05"}
 		1: {0: true, id: 3, name: "高晓松2", age: 26, date: "2018-09-04 05:23:05"}
 		2: {0: true, id: 4, name: "高晓松32", age: 26232, date: "2018-09-19 12:12:06"}length: 3__proto__: Array(0)
-	*/
+	
 	$.each(_rows,function(index,value,array){
 		_delete_id_row+=value.id+",";	   //删除的id字符串1,2,3,4,5,
 		_delete_name_row+=value.name+","; //高晓松0,高晓松1,高晓松2,高晓松3,高晓松5,
@@ -833,17 +989,18 @@ function _stu_delete_banch(){
 	//祛除最后多余的逗号：1,2,3,4,6,  ==>  1,2,3,4,6
 	_delete_id_row=_delete_id_row.substring(0,_delete_id_row.length-1);//删除最后多余的逗号
 	_delete_name_row=_delete_name_row.substring(0,_delete_name_row.length-1);//删除最后多余的逗号
-	
+	 */
 	//删除操作
-	if(confirm("确认删除【"+_delete_name_row+"】吗")){
+				console.log("CCCCCCCCCCCCCCC"+c),
 		//执行批量删除
 		$.ajax({
 			async: false,//将ajax异步传输改成同步传输。默认是true：异步（或不写这句），false：同步。将ajax异步传输改成同步传输的话，则必须执行完ajax程序后才会执行后面的，不加则是异步传输同步进行。
 			//cache : false,//禁用缓存（POST请求默认禁用缓存，只是GET方式默认启用缓存）。默认情况下，请求总会被发出去，但浏览器有可能从他的缓存中调取数据。要禁止使用缓存的结果，可以设置cache参数为false。会在请求后就一个随机数来避免缓存效果
 		
-			type:'POST',// 
-			url:"${APP_PATH}/student/deleteBanch",  
-			data: {delete_id_banch:_delete_id_row},
+			type:'GET',// 
+			url:"${APP_PATH}/student/delete",  
+			data: {id:c},
+
 			dataType:'json',//返回类型，有html，json，xml，text，如果返回的内容不符，则执行error的内容
 			
 			 //请求前的处理
@@ -886,7 +1043,7 @@ function _stu_delete_banch(){
 				alert("操作错误");
 			},
 		});
-	}
+	
 };
  
 </script> 
