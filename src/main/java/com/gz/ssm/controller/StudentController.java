@@ -314,6 +314,10 @@ import javafx.scene.control.Alert;
 		return "/studentListJsonBootstrapTable";
 	}
 	
+	@RequestMapping("/listStudentBootstrapTable2")
+	public String showBootstrapTable2() {
+		return "/studentListJsonBootstrapTable2";
+	}
 	
 	
 

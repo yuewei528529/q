@@ -1,4 +1,5 @@
 package com.gz.ssm.entity;
+import java.math.BigDecimal;
 /**
  * ♀描述：学生模块实体类
  * 
@@ -27,9 +28,9 @@ public class Student {
 		super();
 	}
 
-	public Student(String name, Integer age, Date date,String hetongjiner,
-			String xiangmumc,String shoukdanw,String yongtu,String fukuanbili,String yifujiner,String yifubili,String yuer
-			,String hetongbh,String danw,String shuliang,String danjia,String kaipjiner,String sjjhq,String id1) {
+	public Student(String name, Integer age, Date date,BigDecimal hetongjiner,
+			String xiangmumc,String shoukdanw,String yongtu,BigDecimal fukuanbili,BigDecimal yifujiner,BigDecimal yifubili,BigDecimal yuer
+			,String hetongbh,String danw,BigDecimal shuliang,BigDecimal danjia,BigDecimal kaipjiner,String sjjhq,String id1) {
 		super();
 		this.name = name;
 		this.age = age;
@@ -50,20 +51,20 @@ public class Student {
 		this.sjjhq = sjjhq;
 		this.id1 = id1;
 	}
-	private String hetongjiner;
+	private BigDecimal hetongjiner;
 	private Long id;
     private String xiangmumc;
     private String shoukdanw;
     private String yongtu;
-    private String fukuanbili;
-    private String yifujiner;
-    private String yifubili;
-    private String yuer;  
+    private BigDecimal fukuanbili;
+    private BigDecimal yifujiner;
+    private BigDecimal yifubili;
+    private BigDecimal yuer;  
     private String    hetongbh;
     private String danw;  
-    private String shuliang;  
-    private String danjia;  
-    private String kaipjiner;  
+    private BigDecimal shuliang;  
+    private BigDecimal danjia;  
+    private BigDecimal kaipjiner;  
     private String sjjhq;  
     private String id1;    
 	//String类型使用正则来验证比较合适，验证的内容必须符合数据类型，不然报错
@@ -131,11 +132,11 @@ public class Student {
         this.date = date;
     }
     
-    public String gethetongjiner() {
+    public BigDecimal gethetongjiner() {
         return hetongjiner;
     }
 
-    public void sethetongjiner(String hetongjiner) {
+    public void sethetongjiner(BigDecimal hetongjiner) {
         this.hetongjiner = hetongjiner;
     }
     
@@ -161,36 +162,36 @@ public class Student {
     public void setyongtu(String yongtu) {
         this.yongtu = yongtu;
     }
-    public String getfukuanbili() {
+    public BigDecimal getfukuanbili() {
         return fukuanbili;
     }
 
-    public void setfukuanbili(String fukuanbili) {
+    public void setfukuanbili(BigDecimal fukuanbili) {
         this.fukuanbili = fukuanbili;
     }
     
-    public String getyifujiner() {
+    public BigDecimal getyifujiner() {
         return yifujiner;
     }
 
-    public void setyifujiner(String yifujiner) {
+    public void setyifujiner(BigDecimal yifujiner) {
         this.yifujiner = yifujiner;
     }
     
-    public String getyuer() {
+    public BigDecimal getyuer() {
         return yuer;
     }
 
-    public void setyuer(String yuer) {
+    public void setyuer(BigDecimal yuer) {
         this.yuer = yuer;
     }  
     
     
-    public String getyifubili() {
+    public BigDecimal getyifubili() {
         return yifubili;
     }
 
-    public void setyifubili(String yifubili) {
+    public void setyifubili(BigDecimal yifubili) {
         this.yifubili = yifubili;
     }  
     
@@ -210,26 +211,26 @@ public class Student {
         this.danw = danw;
     }     
     
-    public String getshuliang() {
+    public BigDecimal getshuliang() {
         return shuliang;
     }
 
-    public void setshuliang(String shuliang) {
+    public void setshuliang(BigDecimal shuliang) {
         this.shuliang = shuliang;
     }    
     
-    public String getdanjia() {
+    public BigDecimal getdanjia() {
         return danjia;
     }
 
-    public void setdanjia(String danjia) {
+    public void setdanjia(BigDecimal danjia) {
         this.danjia = danjia;
     }      
-    public String getkaipjiner() {
+    public BigDecimal getkaipjiner() {
         return kaipjiner;
     }
 
-    public void setkaipjiner(String kaipjiner) {
+    public void setkaipjiner(BigDecimal kaipjiner) {
         this.kaipjiner = kaipjiner;
     }     
     

@@ -75,15 +75,14 @@
                <option value="all">导出全部数据(bug,需要显示all后执行，等于导出当前页)</option>
          </select>   
  -->
-		<div id="toolbar" class="btn-group">   	     
+		<!-- <div id="toolbar" class="btn-group">   	     
 			<a href="javascript:void(0);" class="btn btn-primary" id="addA"><i class="glyphicon glyphicon-pencil"></i> 新增</a> 
 
-        </div> 
+        </div>  -->
         <!-- 工具栏 end-->  
        
         <!-- bootstrap-table表格 -->         
         <table id="test-table" class="col-xs-12" data-toolbar="#toolbar"></table>    
-        
     </div>
     
     <!-- bootstrap模态框  -->
@@ -619,12 +618,12 @@ function _bootstrap_table(_pageNum){
 				 {field: 'kaipjiner',title: '开票金额',align: 'center', sortable: true},
 				 {field: 'sjjhq',title: '实际交货期',align: 'center', sortable: true},
 				 */
-				 {			field: 'operate',
+				/*  {			field: 'operate',
 						title: '操作',
 						width: '80px',
 						events: operateEvents1,
 						formatter: operateFormatter
-				  } 
+				  }  */
 			 ]
 		 ],
 		 uniqueId: "id",                     //每一行的唯一标识，一般为主键列<tr data-uniqueid="2"></tr>

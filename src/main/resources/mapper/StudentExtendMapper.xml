@@ -22,7 +22,7 @@
   
   <!-- 基础数据 -->
   <sql id="Base_Column_List">
-    id, name, age, date,hetongjiner,xiangmumc,shoukdanw,yongtu,fukuanbili,yifujiner,yifubili,yuer,hetongbh,danw,shuliang,
+   id, name, hetongjiner,age, date,xiangmumc,shoukdanw,yongtu,fukuanbili,yifujiner,yifubili,yuer,hetongbh,danw,shuliang,
     danjia,kaipjiner,sjjhq,id1
   </sql>
   
