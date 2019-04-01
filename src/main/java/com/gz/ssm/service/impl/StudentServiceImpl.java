@@ -24,6 +24,12 @@ public class StudentServiceImpl implements StudentService{
 		return studentMapper.listAll();
 	}
 
+	public List<Student> listAll1() {
+		
+		return studentMapper.listAll();
+	}
+	
+	
 	@Override
 	public List<Student> listAllOrder(String sort,String sortOrder,String searchName,String searchBeginDate,String searchEndDate) {
 		return studentMapper.listAllOrder(sort,sortOrder,searchName,searchBeginDate,searchEndDate);

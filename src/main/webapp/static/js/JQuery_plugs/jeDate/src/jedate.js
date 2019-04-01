@@ -748,6 +748,8 @@
                         var onarr = acquireAttr(geton); 
                         jet.on(node,"click",function () {
                             self[onarr[0]] && self[onarr[0]].apply(node,onarr[1]);
+
+                           jisuanjtts();
                         });
                         node.removeAttribute(aton);
                     }    

@@ -9,7 +9,8 @@
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context 
-		http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context/spring-context.xsd"
+		>
 	
 	<!-- 
 			===================================================
@@ -38,6 +39,22 @@
   		
   		例如：mv.setViewName("/WEB-INF/views/welcome.jsp");  前缀/WEB-INF/views/，后缀.jsp
   	 -->
+
+
+
+<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+		<!--防止ie8出现下载，mvc:annotation-driven注释掉，需要把text/json提到最前面，默认返回json,以免所有ajax设置dataType:json   -->
+                <value>text/json;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+</bean>
+
+
+
   	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
   		<property name="prefix" value="/WEB-INF/views/" /><!-- 前缀 -->
   		<property name="suffix"  value=".jsp" /><!-- 后缀 -->
@@ -98,7 +115,7 @@
 	<mvc:resources location="/static/css/"  mapping="/static/css/**" cache-period="31556926"/>
 	<mvc:resources location="/static/html/"  mapping="/static/html/**" cache-period="31556926"/>
 	<mvc:resources location="/static/images/"  mapping="/static/images/**" cache-period="31556926"/>
-    
+	<mvc:resources location="/static/font/"  mapping="/static/font/**" cache-period="31556926"/>    
     <!-- 
     	资源映射可以设置的更细：
     	<mvc:resources location="/js/"  mapping="/js/**" />  

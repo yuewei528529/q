@@ -189,7 +189,7 @@
 	    	#{idValue}<!-- 循环list数组 -->
 	    </foreach>
    </delete>
-  
+     
   
     <!-- 查询一条(根据主键)-->
    <select id="selectByPrimaryKey"  resultMap="BaseResultMap">
@@ -231,7 +231,7 @@
 	    <!-- 搜索查询 -->
 	    <where>
 	   		<if test="searchName!=null">
-	       		AND xiangmumc like concat('%',#{searchName},'%')
+	       		AND name like concat('%',#{searchName},'%')
 	       </if>
 	   		<if test="searchBeginDate!=null">
 	       		AND shoukdanw like concat('%',#{searchBeginDate},'%')
@@ -240,7 +240,7 @@
    		</where>
 	    <!-- 默认排序 -->
 	    <if test="sort == null">
-	    	 ORDER BY hetongbh ASC 
+	    	 ORDER BY id ASC 
 	    </if>
 	     <!-- 手动排序 -->
 	    <if test="sort != null">

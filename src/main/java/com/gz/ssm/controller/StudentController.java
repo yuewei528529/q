@@ -319,14 +319,18 @@ import javafx.scene.control.Alert;
 		return "/studentListJsonBootstrapTable2";
 	}
 	
-	
+	@RequestMapping("/listStudentBootstrapTable3")
+	public String showBootstrapTable3() {
+		
+		return "/studentListJsonBootstrapTable3";
+	}
 
 	//显示所有student+分页，需要jsp页面通过ajax获取这里分页数据，然后响应JSON类型给浏览器（支持jsp，苹果，安卓，接口等，json数据通用作为响应拓展性很强）
 	//mybatis pagehelp分页插件说明：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/en/HowToUse.md
 	@RequestMapping("/getJsonPageInfoBootstraptable")//传递的参数若为post形式，可以直接用@PostMapping或@GetMapping
 	//将返回的内容通过jackson工具转换成json格式，javabean可以与json很容易转化，格式都是key，value的。
 	@ResponseBody
-	public AjaxMsg list(//传入参数，通过网页--》审查元素--》NetWork-》找到getJsonPageInfoBootstraptable请求--》Headers最下面有显示
+	public Object list(//传入参数，通过网页--》审查元素--》NetWork-》找到getJsonPageInfoBootstraptable请求--》Headers最下面有显示
 							//分页+显示页数
 							@RequestParam(value="pageNumber",defaultValue="1")Integer pageNumber,//当前页码，不传值pageNumber的话默认为第一页 
 							@RequestParam(value="pageSize",defaultValue="5")Integer pageSize,//每页显示数量
@@ -340,7 +344,7 @@ import javafx.scene.control.Alert;
 					   ){
 	 
 		//System.out.println(searchBeginDate+ searchEndDate);
-		//分页2：在查询前调用分页插件，传入页面pg，以及每页显示数量5
+		//分页2：在查询前调用分页插件，传入页面pg，以及每页显示数量5 
 		PageHelper.startPage(pageNumber,pageSize);
 		//分页3：分页查询,startPage后面跟着的查询自动成为分页查询，比如这里就只查询5条数据
 		List<Student> list=studentService.listAllOrder(sort,sortOrder,searchName,searchBeginDate,searchEndDate);
@@ -349,8 +353,10 @@ import javafx.scene.control.Alert;
 		//System.err.println(list.size());
 		//System.err.println(pageInfo.getList());//Page{count=true, pageNum=1, pageSize=5, startRow=0, endRow=5, total=642, pages=129, reasonable=true, pageSizeZero=false}[Student [id=1, name=高晓松0, age=26, date=Sat Sep 01 08:38:21 CST 2018], Student [id=2, name=高晓松1, age=26, date=Sat Sep 01 08:38:21 CST 2018], Student [id=3, name=高晓松2, age=26, date=Sat Sep 01 08:38:21 CST 2018], Student [id=4, name=高晓松3, age=26, date=Sat Sep 01 08:38:21 CST 2018], Student [id=5, name=高晓松4, age=26, date=Sat Sep 01 08:38:21 CST 2018]]
 		//分页5：将pageInfo封装入AjaxMsg对象中，并添加两个参数code和msg
+		
 		//System.out.println(AjaxMsg.ajaxResultSuccess().addResultMap("pageInfoJson", pageInfo));//AjaxMsg [code=200, msg=success, resultMap={pageInfoJson=PageInfo{pageNum=1, pageSize=5, size=5, startRow=1, endRow=5, total=5000, pages=1000, list=Page{count=true, pageNum=1, pageSize=5, startRow=0, endRow=5, total=5000, pages=1000, reasonable=true, pageSizeZero=false}[Student [id=1, name=习近平, age=99, date=Fri Aug 31 12:23:37 CST 2018], Student [id=3, name=高晓松2, age=26, date=Fri Aug 31 12:23:37 CST 2018], Student [id=4, name=高晓松3, age=26, date=Fri Aug 31 12:23:37 CST 2018], Student [id=5, name=高晓松4, age=26, date=Fri Aug 31 12:23:37 CST 2018], Student [id=6, name=高晓松5, age=26, date=Fri Aug 31 12:23:37 CST 2018]], prePage=0, nextPage=2, isFirstPage=true, isLastPage=false, hasPreviousPage=false, hasNextPage=true, navigatePages=6, navigateFirstPage=1, navigateLastPage=6, navigatepageNums=[1, 2, 3, 4, 5, 6]}}]
-		return AjaxMsg.ajaxResultSuccess().addResultMap("pageInfo", pageInfo);
+		return  AjaxMsg.ajaxResultSuccess().addResultMap("pageInfo", pageInfo);
+		//return list ;
 	
 		/**
 		 * .解释上面一句话

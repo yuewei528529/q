@@ -29,7 +29,7 @@ public class Student {
 	}
 
 	public Student(String name, Integer age, Date date,BigDecimal hetongjiner,
-			String xiangmumc,String shoukdanw,String yongtu,BigDecimal fukuanbili,BigDecimal yifujiner,BigDecimal yifubili,BigDecimal yuer
+			String xiangmumc,String shoukdanw,String yongtu,String fukuanbili,BigDecimal yifujiner,BigDecimal yifubili,BigDecimal yuer
 			,String hetongbh,String danw,BigDecimal shuliang,BigDecimal danjia,BigDecimal kaipjiner,String sjjhq,String id1) {
 		super();
 		this.name = name;
@@ -56,7 +56,7 @@ public class Student {
     private String xiangmumc;
     private String shoukdanw;
     private String yongtu;
-    private BigDecimal fukuanbili;
+    private String fukuanbili;
     private BigDecimal yifujiner;
     private BigDecimal yifubili;
     private BigDecimal yuer;  
@@ -162,11 +162,11 @@ public class Student {
     public void setyongtu(String yongtu) {
         this.yongtu = yongtu;
     }
-    public BigDecimal getfukuanbili() {
+    public String getfukuanbili() {
         return fukuanbili;
     }
 
-    public void setfukuanbili(BigDecimal fukuanbili) {
+    public void setfukuanbili(String fukuanbili) {
         this.fukuanbili = fukuanbili;
     }
     
