@@ -231,7 +231,7 @@
 	    <!-- 搜索查询 -->
 	    <where>
 	   		<if test="searchName!=null">
-	       		AND name like concat('%',#{searchName},'%')
+	       		AND name=#{searchName}
 	       </if>
 	   		<if test="searchBeginDate!=null">
 	       		AND shoukdanw like concat('%',#{searchBeginDate},'%')

@@ -5,6 +5,22 @@
 	<groupId>com.gz.maven</groupId>
 	<artifactId>GzMavenSSM</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+<repositories>
+    <repository>
+        <!-- Maven 自带的中央仓库使用的Id为central 如果其他的仓库声明也是用该Id
+        就会覆盖中央仓库的配置 --> 
+  <id>mvnrepository</id>
+        <name>mvnrepository</name>
+        <url>http://www.mvnrepository.com/</url>
+        <layout>default</layout>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </repository>
+</repositories>
 	<packaging>war</packaging>
 
 	<properties>
@@ -19,7 +35,7 @@
 		<!-- Spring和SpringMVC版本 -->
 	    <spring.version>5.0.8.RELEASE</spring.version>
 	    <!-- mysql版本 -->
-	    <mysql.version>5.0.4</mysql.version>
+	    <mysql.version>5.1.42</mysql.version>
 	    <!-- MyBatis版本 -->
 	    <mybatis.version>3.4.4</mybatis.version>
 	    <!-- druid连接池版本 -->
@@ -45,14 +61,23 @@
 
 
 	<dependencies>
-	
-	<!-- 第一部分：Spring配置 -->
+	    
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.2</version>
+    <scope>provided</scope>
+</dependency>
+
+
 	    <!-- Spring Core -->
    		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
@@ -161,7 +186,7 @@
 		<dependency>
 			<groupId>org.mybatis.generator</groupId>
 			<artifactId>mybatis-generator-core</artifactId>
-			<version>1.3.7</version>
+			<version>1.3.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -263,17 +288,63 @@
 		    <scope>test</scope>
 		</dependency>
 
- 
- 
-
-
 	<!-- 第六部分：其他-->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.9.1</version>
 		</dependency> 
- 
+<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
+<dependency>
+    <groupId>org.apache.maven</groupId>
+    <artifactId>maven-plugin-api</artifactId>
+    <version>3.0.4</version>
+</dependency>
 
 	</dependencies>
+	<build>
+	 <plugins>
+ <plugin>  
+
+
+        <groupId>org.mybatis.generator</groupId>  
+        <artifactId>mybatis-generator-maven-plugin</artifactId>  
+        <version>1.3.2</version>  
+        <configuration>
+          <configurationFile>src/main/resources/mybatis-generator/generatorConfig.xml</configurationFile>
+          <verbose>true</verbose>
+          <overwrite>true</overwrite>
+  </configuration>
+        <executions>  
+            <execution>  
+                <id>Generate MyBatis Artifacts</id>  
+                <goals>  
+                    <goal>generate</goal>  
+                </goals>  
+            </execution>  
+        </executions>  
+  
+        <dependencies>  
+            <dependency>  
+                <groupId>mysql</groupId>  
+                <artifactId>mysql-connector-java</artifactId>  
+                 <!-- 引用依赖库的版本 -->
+                <version>5.1.42</version>  
+            </dependency>  
+            <dependency>  
+                <groupId>org.mybatis.generator</groupId>  
+                <artifactId>mybatis-generator-core</artifactId>  
+                <version>1.3.2</version>  
+            </dependency>  
+            <dependency>  
+                <groupId>org.mybatis</groupId>  
+                <artifactId>mybatis</artifactId>  
+                <!-- 引用依赖库的版本 -->
+                <version>${mybatis.version}</version>  
+            </dependency>  
+        </dependencies>  
+</plugin>  
+       </plugins>
+</build>
+
 </project>

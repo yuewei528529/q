@@ -36,48 +36,38 @@ import com.gz.ssm.entity.Student;
 @ExtendWith(SpringExtension.class)//@ExtendWith(SpringExtension.class)//是junit4
 //导入spring的配置文件
 @ContextConfiguration(locations= {
-		"classpath:/spring_config.xml"
+		"classpath:/spring_mybatis.xml"
 })
 public class MapperTest {
+	;
 
 	@Autowired
 	private StudentMapper studentMapper;
 	
-	@Autowired
-	private SqlSession sqlSession;
+/*	@Autowired
+	private SqlSession sqlSession;*/
  
  
 	//单条插入测试
     @Test
 	void testInsertOne() throws Exception {
     	 
-    	 System.out.println(studentMapper);
+    	 System.out.println("JJJJJJJJJJJJJJ");
     	 
-         Date date = new Date(); 
+/*         Date date = new Date(); 
     	 long longTime = date.getTime();
          Timestamp timestamp = new Timestamp(longTime); 
          System.out.println(new Date());
          
          //插入操作
-         Student student = new Student("景强章", 26, timestamp);
+         Student student = new Student("景强章", 26, timestamp, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     	 studentMapper.insertSelective(student);
-    	 System.out.println("新增学生id是：" + student.getId());
+    	 System.out.println("新增学生id是：" + student.getId());*/
 	}
-    
+    /*
     //多条插入测试（性能差，插入1000条耗时52468 ms，用下面的testInsertMore2方法代替批量插入）
-    /**
-     * .比如插入3条数据，要使用3条sql，所以效率批量很低
-     * DEBUG [main] - ==>  Preparing: insert into student ( name, age, date ) values ( ?, ?, ? ) 
-		DEBUG [main] - ==> Parameters: 景强章0(String), 26(Integer), 2018-09-01 11:36:51.692(Timestamp)
-		DEBUG [main] - <==    Updates: 1
-		DEBUG [main] - ==>  Preparing: insert into student ( name, age, date ) values ( ?, ?, ? ) 
-		DEBUG [main] - ==> Parameters: 景强章1(String), 26(Integer), 2018-09-01 11:36:51.692(Timestamp)
-		DEBUG [main] - <==    Updates: 1
-		DEBUG [main] - ==>  Preparing: insert into student ( name, age, date ) values ( ?, ?, ? ) 
-		DEBUG [main] - ==> Parameters: 景强章2(String), 26(Integer), 2018-09-01 11:36:51.692(Timestamp)
-		DEBUG [main] - <==    Updates: 1
-     * @throws Exception
-     */
+ 
+     *//*
     @Test
 	void testInsertMore() throws Exception {
     	
@@ -90,7 +80,7 @@ public class MapperTest {
 		//记录执行时间
 		long beginMillis = System.currentTimeMillis();
     	for(int i=0;i<1000;i++) {
-    		student=new Student("景强章"+i, 26, timestamp);
+    		student=new Student("景强章"+i, 26, timestamp, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     		studentMapper.insertSelective(student);
     	}
     	
@@ -98,16 +88,8 @@ public class MapperTest {
 	}
      
 	//批量插入测试（推荐，高效），插入1000条仅用时：331 ms
-    /**
-     * 	批量插入组合成一条sql，所以效率高出很多
-		DEBUG [main] - ==>  Preparing: insert into student (name, age, date) values (?,?,?) , (?,?,?) , (?,?,?) 
-		DEBUG [main] - ==> Parameters: 高晓松0(String), 26(Integer), 2018-09-01 11:37:44.477(Timestamp), 高晓松1(String), 26(Integer), 2018-09-01 11:37:44.477(Timestamp), 高晓松2(String), 26(Integer), 2018-09-01 11:37:44.477(Timestamp)
-		DEBUG [main] - <==    Updates: 3
-		DEBUG [main] - ==>  Preparing: SELECT LAST_INSERT_ID() 
-		DEBUG [main] - ==> Parameters: 
-		DEBUG [main] - <==      Total: 1
-     * @throws Exception
-     */
+
+     *//*
 	@Test
 	void testInsertMore2() throws Exception {
 		
@@ -121,7 +103,7 @@ public class MapperTest {
     	
  
     	for(int i=0;i<1000;i++) {
-    		list.add(new Student("高晓松"+i, 26, timestamp));
+    		list.add(new Student("高晓松"+i, 26, timestamp, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null));
     	}
     	long  resultNu=studentMapper.insertBatch(list); //一次性插入，不是一条一条插入，所以效率高
      
@@ -178,13 +160,13 @@ public class MapperTest {
 	//查询所有测试
 	@Test
 	void testListAll() throws Exception {
-		List<Student> list=studentMapper.listAll();
-		System.out.println(list.size());
+		//List<Student> list=studentMapper.listAll();
+		System.out.println("ggggg");
 	}
  
 	
 	
 	
-	
+	*/
 	
 }

@@ -115,7 +115,9 @@
 	<mvc:resources location="/static/css/"  mapping="/static/css/**" cache-period="31556926"/>
 	<mvc:resources location="/static/html/"  mapping="/static/html/**" cache-period="31556926"/>
 	<mvc:resources location="/static/images/"  mapping="/static/images/**" cache-period="31556926"/>
-	<mvc:resources location="/static/font/"  mapping="/static/font/**" cache-period="31556926"/>    
+	<mvc:resources location="/static/font/"  mapping="/static/font/**" cache-period="31556926"/>  
+	<mvc:resources location="/AceAdmin-master/assets/js/"  mapping="/AceAdmin-master/assets/js/**" cache-period="31556926"/>  	  
+	<mvc:resources location="/AceAdmin-master/assets/css/"  mapping="/AceAdmin-master/assets/css/**" cache-period="31556926"/>  	
     <!-- 
     	资源映射可以设置的更细：
     	<mvc:resources location="/js/"  mapping="/js/**" />  
