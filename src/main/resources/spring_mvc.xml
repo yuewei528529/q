@@ -89,7 +89,7 @@
 			
 			3： 方式一的限制：静态资源存放的位置不能是WEB-INF下（解析后），因为WEB-INF文件夹不可直接url访问。
  	  -->
- 	    <!-- <mvc:default-servlet-handler />     -->
+ 	 <mvc:default-servlet-handler />  
  	  
  	  <!--
  	  
@@ -108,8 +108,8 @@
  	  -->
  	  
 	<!--<mvc:resources location="/static/"  mapping="/static/**" cache-period="31556926"/>-->
-	<mvc:resources location="/static/bootstrap-table/"  mapping="/static/bootstrap-table/**" cache-period="31556926"/>
-	<mvc:resources location="/static/bootstrap-4.0.0-dist/"  mapping="/static/bootstrap-4.0.0-dist/**" cache-period="31556926"/>
+<!-- 	<mvc:resources location="/static/bootstrap-table/"  mapping="/static/bootstrap-table/**" cache-period="31556926"/> -->
+<!-- 	<mvc:resources location="/static/bootstrap-4.0.0-dist/"  mapping="/static/bootstrap-4.0.0-dist/**" cache-period="31556926"/>
 	<mvc:resources location="/static/bootstrap-3.3.7-dist/"  mapping="/static/bootstrap-3.3.7-dist/**" cache-period="31556926"/>
 	<mvc:resources location="/static/js/"  mapping="/static/js/**" cache-period="31556926"/>
 	<mvc:resources location="/static/css/"  mapping="/static/css/**" cache-period="31556926"/>
@@ -117,7 +117,7 @@
 	<mvc:resources location="/static/images/"  mapping="/static/images/**" cache-period="31556926"/>
 	<mvc:resources location="/static/font/"  mapping="/static/font/**" cache-period="31556926"/>  
 	<mvc:resources location="/AceAdmin-master/assets/js/"  mapping="/AceAdmin-master/assets/js/**" cache-period="31556926"/>  	  
-	<mvc:resources location="/AceAdmin-master/assets/css/"  mapping="/AceAdmin-master/assets/css/**" cache-period="31556926"/>  	
+	<mvc:resources location="/AceAdmin-master/assets/css/"  mapping="/AceAdmin-master/assets/css/**" cache-period="31556926"/>   -->	
     <!-- 
     	资源映射可以设置的更细：
     	<mvc:resources location="/js/"  mapping="/js/**" />  

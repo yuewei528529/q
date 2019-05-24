@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -30,11 +28,10 @@ import com.github.pagehelper.PageInfo;
 import com.gz.ssm.entity.AjaxMsg;
 import com.gz.ssm.entity.Student;
 import com.gz.ssm.entity.kemu;
+import com.gz.ssm.entity.zijin;
 import com.gz.ssm.service.StudentService;
 import com.gz.ssm.service.kemuservice;
 import com.gz.ssm.service.zijinservice;
-
-
 
 /**
  * ♀描述：学生控制器 ，负责页面分发与跳转
@@ -52,6 +49,7 @@ public class StudentController {
 	private kemuservice GG;
 	@Autowired
 	private zijinservice ww;
+
 	// 显示所有student+分页（传统写法，返回java的PageInfo对象类型，其他平台无法使用，被下面返回json的写法代替）
 	// 分页插件说明：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/en/HowToUse.md
 	@RequestMapping("/list") // 传递的参数若为post形式，可以直接用@PostMapping或@GetMapping
@@ -149,7 +147,7 @@ public class StudentController {
 	// 新增学生
 	@PostMapping("/insert")
 	@ResponseBody
-	public AjaxMsg insert( Student student, BindingResult result) {// @Valid和BindingResult result是JSR303验证学生实体数据
+	public AjaxMsg insert(Student student, BindingResult result) {// @Valid和BindingResult result是JSR303验证学生实体数据
 		// Date date= new Date();
 		// System.out.println(date);//当前时间Date类型：Thu Sep 06 21:11:20 CST 2018
 		System.out.println("SpringMVC获取到的信息:" + student);// Student [id=null, name=2, age=2, date=Thu Sep 06 07:55:45
@@ -378,12 +376,10 @@ public class StudentController {
 
 	}
 
-
-
 	@RequestMapping("/getJsonPageInfoBootstraptable1") // 传递的参数若为post形式，可以直接用@PostMapping或@GetMapping
 	// 将返回的内容通过jackson工具转换成json格式，javabean可以与json很容易转化，格式都是key，value的。
 	@ResponseBody
-	public Object list1() {
+	public Object list1() {    
 
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("records", "1000000");
@@ -397,24 +393,24 @@ public class StudentController {
 		System.out.println("kkkkkkkk" + GG.listAll());
 		resultMap1.put("rows", person);
 		resultMap.put("rows", GG.listAll());
-		GG.deleteByPrimaryKey(71);
-		return GG.listAllOrder("爱",2);
-
+		//GG.deleteByPrimaryKey(71);
+		// return GG.listAllOrder("爱",2);
+		return GG.listAll();
+  
 	}
-
 
 	@RequestMapping("/zongb")
 	@ResponseBody
-	public Object list3(String xmmc,int id) {
-		return ww.listAllOrder(xmmc, id);
-		
-		  
-	}   
+	public Object list3(String xmmc, int id) {
+		return ww.listAll( );
+
+	}
+
 	@RequestMapping("/getJsonPageInfoBootstraptable3") // 传递的参数若为post形式，可以直接用@PostMapping或@GetMapping
 	// 将返回的内容通过jackson工具转换成json格式，javabean可以与json很容易转化，格式都是key，value的。
 	@ResponseBody
-	public Object list2(String xmmc,int id) {
- 
+	public Object list2(String xmmc, int id) {
+
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("records", "1000000");
 		resultMap.put("page", 1);
@@ -423,12 +419,32 @@ public class StudentController {
 		// List<kemu> person2 = new ArrayList<>();
 		Map<String, List> resultMap1 = new HashMap<>();
 
-		//System.out.println("kkkkkkkk" + ww.listAll());
+		// System.out.println("kkkkkkkk" + ww.listAll());
 		// resultMap1.put("rows", person);
 		resultMap.put("rows", ww.listAll());
-	//	GG.deleteByPrimaryKey(71);
+		// GG.deleteByPrimaryKey(71);
 		return GG.listAllOrder(xmmc, id);
 
+	}
+
+	@RequestMapping("/xinzenys") // 传递的参数若为post形式，可以直接用@PostMapping或@GetMapping
+	// 将返回的内容通过jackson工具转换成json格式，javabean可以与json很容易转化，格式都是key，value的。
+	@ResponseBody
+	public void list4( String id,String zftj,String sqrq,String zjxqsy) {
+		zijin record = new zijin(null, null, null, null, null, null, null, null, null, null, null, id, zftj, zjxqsy, sqrq);
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("records", "1000000");
+		resultMap.put("page", 1);
+		resultMap.put("total", 5000000);
+		// List<kemu> person = new ArrayList<>();
+		// List<kemu> person2 = new ArrayList<>();
+		Map<String, List> resultMap1 = new HashMap<>();
+
+		// System.out.println("kkkkkkkk" + ww.listAll());
+		// resultMap1.put("rows", person);
+
+		ww.insert(record);
+		//return resultMap.put("rows", ww.listAll());
 	}
 
 }

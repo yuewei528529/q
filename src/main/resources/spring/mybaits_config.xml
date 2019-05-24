@@ -17,7 +17,7 @@
 		 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		
-		
+		      <!--   <setting name="logImpl" value="STDOUT_LOGGING" /> -->
 	</settings>
 	
 	<!-- 配置分页插件,需要pagehelper依赖 -->
