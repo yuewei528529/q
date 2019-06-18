@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gz.ssm.dao.zijinMapper;
+import com.gz.ssm.dao.zijinMapper;  
 import com.gz.ssm.entity.kemu;
 import com.gz.ssm.entity.zijin;
 import com.gz.ssm.entity.zjxq;

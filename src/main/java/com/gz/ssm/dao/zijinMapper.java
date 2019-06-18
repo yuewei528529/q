@@ -53,7 +53,7 @@ public interface zijinMapper {
      */
     int updateByPrimaryKey(zijin record);
 
-	List<zijin> listAll();
-
 	List<zijin> listAllOrder(String xxxx, int id);
+
+	List<zijin> listAll();
 }
