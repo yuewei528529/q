@@ -11,7 +11,7 @@
 	<repositories><!-- 代码库 --> <repository> <id>maven-ali</id> <url>http://maven.aliyun.com/nexus/content/groups/public//</url> <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> <updatePolicy>always</updatePolicy> <checksumPolicy>fail</checksumPolicy> </snapshots> </repository> </repositories>
 
 	<properties>
-		<spring.version>4.2.7.RELEASE</spring.version>
+		<spring.version>6.0.0</spring.version>
 		<mybatis.version>3.4.0</mybatis.version>
 		<jackson.version>2.5.4</jackson.version>
 	</properties>
